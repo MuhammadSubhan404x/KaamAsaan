@@ -2,21 +2,57 @@ import { Github } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 mt-20 py-10">
-      <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-600">
-        <div className="flex items-center gap-2">
-          <span className="text-white font-semibold text-base">KaamAsaan</span>
-          <span>—</span>
-          <span>Making Work Easy</span>
+    <footer style={{
+      borderTop: "1px solid rgba(255,255,255,0.06)",
+      marginTop: 80,
+      padding: "20px 24px",
+    }}>
+      <div style={{
+        maxWidth: "1152px",
+        margin: "0 auto",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
+        gap: 12,
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{
+            width: 18, height: 18, borderRadius: 4,
+            background: "linear-gradient(135deg, #5E6AD2, #7A85FF)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: "0.5625rem", fontWeight: 800, color: "#fff",
+          }}>
+            K
+          </div>
+          <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+            KaamAsaan
+          </span>
+          <span style={{ fontSize: "0.75rem", color: "var(--text-tertiary)" }}>—</span>
+          <span style={{ fontSize: "0.75rem", color: "var(--text-tertiary)" }}>Making Work Easy</span>
         </div>
-        <span className="text-slate-600 text-xs">Emails are processed transiently by AI. Nothing is stored on our servers. © 2026 KaamAsaan.</span>
+
+        <span style={{ fontSize: "0.6875rem", color: "var(--text-tertiary)" }}>
+          Emails processed transiently by AI. Nothing stored. © 2026 KaamAsaan.
+        </span>
+
         <a
           href="https://github.com/MuhammadSubhan404x/KaamAsaan"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors group"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            fontSize: "0.75rem",
+            color: "var(--text-tertiary)",
+            textDecoration: "none",
+            transition: "color 150ms ease",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.color = "var(--text-primary)")}
+          onMouseLeave={e => (e.currentTarget.style.color = "var(--text-tertiary)")}
         >
-          <Github size={15} className="group-hover:text-white" />
+          <Github size={13} />
           <span>github.com/MuhammadSubhan404x/KaamAsaan</span>
         </a>
       </div>
