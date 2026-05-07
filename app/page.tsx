@@ -194,34 +194,37 @@ export default function Home() {
               </div>
 
               {error && (
-                <div className="flex items-center gap-2.5 bg-red-500/10 border border-red-500/25 text-red-400 rounded-xl px-4 py-3 text-sm">
-                  <AlertCircle size={16} className="flex-shrink-0" />{error}
+                <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 14px", background: "rgba(255,255,255,0.04)", border: "1px solid var(--color-border-primary)", borderRadius: "var(--radius-6)", fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>
+                  <AlertCircle size={14} style={{ flexShrink: 0, color: "var(--color-text-primary)" }} />{error}
                 </div>
               )}
 
               {isFallback && (
-                <div className="flex items-center gap-2.5 bg-amber-500/10 border border-amber-500/25 text-amber-400 rounded-xl px-4 py-3 text-sm">
-                  <AlertTriangle size={16} className="flex-shrink-0" />
+                <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 14px", background: "rgba(255,255,255,0.04)", border: "1px solid var(--color-border-primary)", borderRadius: "var(--radius-6)", fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>
+                  <AlertTriangle size={14} style={{ flexShrink: 0, color: "var(--color-text-primary)" }} />
                   AI extraction timed out — showing pre-analyzed sample results.
                 </div>
               )}
 
               <div className="flex items-center justify-center gap-4 py-2 flex-wrap">
                 <button onClick={handleAnalyze} disabled={loading}
-                  className="group btn-glow flex items-center gap-3 bg-gradient-to-r from-violet-600 to-violet-500 hover:from-violet-500 hover:to-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-12 py-4 rounded-2xl text-lg transition-all duration-300 shadow-xl shadow-violet-500/30">
-                  <Sparkles size={20} className={loading ? "animate-spin" : "group-hover:rotate-12 transition-transform"} />
+                  className="btn-invert"
+                  style={{ padding: "12px 40px", fontSize: "1rem", gap: 10, borderRadius: "var(--radius-8)" }}>
+                  <Sparkles size={18} className={loading ? "animate-spin" : ""} />
                   {loading ? "Analyzing..." : demoMode ? "Run Demo" : "Analyze Inbox"}
                 </button>
 
                 <button onClick={handleDemoModeToggle} disabled={loading}
-                  className={`flex items-center gap-2 px-4 py-4 rounded-2xl text-sm border transition-all disabled:opacity-40 disabled:cursor-not-allowed ${demoMode ? "bg-amber-500/15 border-amber-500/40 text-amber-300" : "border-white/10 text-slate-500 hover:text-slate-300 hover:border-white/20"}`}>
+                  className="btn-secondary"
+                  style={{ padding: "12px 18px", fontSize: "0.9375rem", borderRadius: "var(--radius-8)", opacity: loading ? 0.4 : 1 }}>
                   <Zap size={14} />
                   {demoMode ? "Demo Mode ON" : "Demo Mode"}
                 </button>
 
                 {results && !loading && (
-                  <button onClick={handleClear} className="flex items-center gap-2 text-slate-500 hover:text-white border border-white/10 hover:border-white/25 px-5 py-4 rounded-2xl text-sm transition-all">
-                    <RotateCcw size={14} /> Clear & Reset
+                  <button onClick={handleClear} className="btn-secondary"
+                    style={{ padding: "12px 18px", fontSize: "0.9375rem", borderRadius: "var(--radius-8)" }}>
+                    <RotateCcw size={14} /> Clear
                   </button>
                 )}
               </div>

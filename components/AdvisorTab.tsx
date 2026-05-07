@@ -105,11 +105,11 @@ export default function AdvisorTab({ profile, topOpportunities, messages, onMess
       }}>
         <div style={{
           width: 36, height: 36, borderRadius: 8, flexShrink: 0,
-          background: "linear-gradient(135deg, #5E6AD2, #7A85FF)",
+          background: "#ffffff",
           display: "flex", alignItems: "center", justifyContent: "center",
-          boxShadow: "0 0 16px rgba(94,106,210,0.3)",
+          boxShadow: "none",
         }}>
-          <Bot size={18} style={{ color: "#fff" }} />
+          <Bot size={18} style={{ color: "#000" }} />
         </div>
         <div>
           <h2 style={{ fontSize: "0.9375rem", fontWeight: 600, letterSpacing: "-0.02em", color: "var(--text-primary)" }}>
@@ -123,9 +123,9 @@ export default function AdvisorTab({ profile, topOpportunities, messages, onMess
           marginLeft: "auto",
           display: "flex", alignItems: "center", gap: 6,
           fontSize: "0.6875rem", fontWeight: 500,
-          color: "var(--score-high)",
-          background: "rgba(66,167,114,0.08)",
-          border: "1px solid rgba(66,167,114,0.15)",
+          color: "var(--color-text-secondary)",
+          background: "rgba(255,255,255,0.04)",
+          border: "1px solid var(--color-border-primary)",
           borderRadius: 99,
           padding: "4px 10px",
         }}>
@@ -144,8 +144,8 @@ export default function AdvisorTab({ profile, topOpportunities, messages, onMess
             }}>
               <div style={{
                 width: 48, height: 48, borderRadius: 12,
-                background: "rgba(94,106,210,0.1)",
-                border: "1px solid rgba(94,106,210,0.15)",
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid var(--color-border-primary)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 margin: "0 auto 12px",
               }}>
@@ -209,11 +209,11 @@ export default function AdvisorTab({ profile, topOpportunities, messages, onMess
             {msg.role === "assistant" && (
               <div style={{
                 width: 28, height: 28, borderRadius: 7, flexShrink: 0,
-                background: "linear-gradient(135deg, #5E6AD2, #7A85FF)",
+                background: "#ffffff",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 marginTop: 2,
               }}>
-                <Bot size={13} style={{ color: "#fff" }} />
+                <Bot size={13} style={{ color: "#000" }} />
               </div>
             )}
 
@@ -225,13 +225,11 @@ export default function AdvisorTab({ profile, topOpportunities, messages, onMess
                 fontSize: "0.875rem",
                 lineHeight: 1.6,
                 background: msg.role === "user"
-                  ? "linear-gradient(135deg, #5E6AD2, #7A85FF)"
-                  : "var(--bg-elevated)",
-                color: msg.role === "user" ? "#fff" : "var(--text-secondary)",
-                border: msg.role === "assistant" ? "1px solid rgba(255,255,255,0.07)" : "none",
-                boxShadow: msg.role === "user"
-                  ? "0 2px 12px rgba(94,106,210,0.25)"
-                  : "inset 0 1px 0 rgba(255,255,255,0.04)",
+                  ? "#ffffff"
+                  : "var(--color-bg-level-3)",
+                color: msg.role === "user" ? "#000000" : "var(--color-text-secondary)",
+                border: msg.role === "assistant" ? "1px solid var(--color-border-primary)" : "none",
+                boxShadow: "none",
               }}
             >
               {msg.content
@@ -260,10 +258,10 @@ export default function AdvisorTab({ profile, topOpportunities, messages, onMess
           <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
             <div style={{
               width: 28, height: 28, borderRadius: 7,
-              background: "linear-gradient(135deg, #5E6AD2, #7A85FF)",
+              background: "#ffffff",
               display: "flex", alignItems: "center", justifyContent: "center",
             }}>
-              <Bot size={13} style={{ color: "#fff" }} />
+              <Bot size={13} style={{ color: "#000" }} />
             </div>
             <div style={{
               padding: "10px 14px",

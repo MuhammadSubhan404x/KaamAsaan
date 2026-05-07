@@ -52,17 +52,24 @@ export default function RoadmapTab({ profile }: RoadmapTabProps) {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {ROLES.map((role) => (
                   <button key={role} onClick={() => setSelectedRole(role)}
-                    className={`text-left text-xs px-3 py-3 rounded-xl border transition-all duration-200 ${selectedRole === role ? "border-violet-500/60 bg-violet-500/15 text-violet-300" : "border-white/8 bg-white/3 text-slate-400 hover:border-violet-500/30 hover:text-slate-300"}`}
-                    style={{ background: selectedRole === role ? undefined : "rgba(255,255,255,0.03)" }}>
+                    style={{
+                      textAlign: "left", fontSize: "0.75rem", padding: "10px 12px",
+                      borderRadius: "var(--radius-6)", border: "1px solid",
+                      transition: "all 150ms ease", cursor: "pointer",
+                      background: selectedRole === role ? "#ffffff" : "rgba(255,255,255,0.03)",
+                      color: selectedRole === role ? "#000000" : "var(--color-text-tertiary)",
+                      borderColor: selectedRole === role ? "#ffffff" : "var(--color-border-primary)",
+                    }}>
                     {role}
                   </button>
                 ))}
               </div>
             </div>
-            {error && <p className="text-sm text-red-400">{error}</p>}
+            {error && <p style={{ fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>{error}</p>}
             <button onClick={generate} disabled={!selectedRole || loading}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-500 hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-4 rounded-2xl transition-all text-base shadow-lg shadow-violet-500/25">
-              {loading ? <><Loader2 size={18} className="animate-spin" /> Generating your roadmap...</> : <><TrendingUp size={18} /> Generate Roadmap</>}
+              className="btn-invert"
+              style={{ width: "100%", padding: "12px 20px", fontSize: "1rem", borderRadius: "var(--radius-8)", gap: 8, opacity: (!selectedRole || loading) ? 0.35 : 1, cursor: (!selectedRole || loading) ? "not-allowed" : "pointer" }}>
+              {loading ? <><Loader2 size={16} className="animate-spin" /> Generating roadmap...</> : <><TrendingUp size={16} /> Generate Roadmap</>}
             </button>
           </motion.div>
         ) : (
