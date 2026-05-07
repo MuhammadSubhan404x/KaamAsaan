@@ -8,139 +8,97 @@ interface HeroProps {
 
 export default function Hero({ onGetStarted }: HeroProps) {
   return (
-    <section
-      style={{
-        background: "#09090b",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
-        padding: "72px 24px 64px",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* Subtle dot grid */}
-      <div className="dot-grid" style={{ position: "absolute", inset: 0, opacity: 0.4, pointerEvents: "none" }} />
+    <section style={{
+      background: "#000000",
+      borderBottom: "1px solid rgba(255,255,255,0.15)",
+      padding: "80px 24px 72px",
+      position: "relative",
+      overflow: "hidden",
+    }}>
+      <div className="dot-grid" style={{ position: "absolute", inset: 0, opacity: 0.35, pointerEvents: "none" }} />
 
-      {/* Subtle radial vignette from center */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.04) 0%, transparent 70%)",
-      }} />
+      <div style={{ position: "relative", maxWidth: 960, margin: "0 auto" }}>
 
-      <div style={{ position: "relative", maxWidth: 900, margin: "0 auto" }}>
-        {/* Eyebrow badge */}
-        <div
-          className="animate-fade-up"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            marginBottom: 32,
-            padding: "5px 12px",
-            background: "rgba(255,255,255,0.04)",
-            border: "1px solid rgba(255,255,255,0.1)",
-            borderRadius: 99,
-            fontSize: "0.75rem",
-            color: "#a1a1aa",
-            letterSpacing: "0.02em",
-            animationDelay: "0ms",
-          }}
-        >
-          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22c55e", flexShrink: 0 }} />
-          AI-Powered Opportunity Intelligence · Pakistan
+        {/* Eyebrow */}
+        <div className="animate-fade-up" style={{
+          display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 36,
+          padding: "4px 14px",
+          border: "1px solid rgba(255,255,255,0.2)",
+          borderRadius: 99,
+          fontSize: "0.75rem",
+          color: "rgba(255,255,255,0.5)",
+          letterSpacing: "0.04em",
+          animationDelay: "0ms",
+        }}>
+          <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#ffffff", flexShrink: 0 }} />
+          AI-POWERED OPPORTUNITY INTELLIGENCE
         </div>
 
-        {/* Aceternity-style massive headline */}
-        <h1
-          className="animate-fade-up"
-          style={{
-            fontSize: "clamp(3rem, 8vw, 6.5rem)",
-            fontWeight: 900,
-            letterSpacing: "-0.04em",
-            lineHeight: 0.95,
-            color: "#fafafa",
-            marginBottom: 28,
-            animationDelay: "60ms",
-          }}
-        >
-          Stop Missing
-          <br />
-          <span style={{ color: "#52525b" }}>Deadlines.</span>
-          <br />
-          Start{" "}
+        {/* Massive headline */}
+        <h1 className="animate-fade-up" style={{
+          fontSize: "clamp(3.5rem, 9vw, 7.5rem)",
+          fontWeight: 900,
+          letterSpacing: "-0.05em",
+          lineHeight: 0.92,
+          color: "#ffffff",
+          marginBottom: 32,
+          animationDelay: "50ms",
+        }}>
+          STOP<br />
+          MISSING<br />
           <span style={{
-            WebkitTextStroke: "1px rgba(255,255,255,0.5)",
+            WebkitTextStroke: "2px #ffffff",
             WebkitTextFillColor: "transparent",
+            color: "transparent",
           }}>
-            Winning.
+            DEADLINES.
           </span>
         </h1>
 
         {/* Subline */}
-        <p
-          className="animate-fade-up"
-          style={{
-            fontSize: "1rem",
-            color: "#71717a",
-            lineHeight: 1.6,
-            maxWidth: 520,
-            marginBottom: 36,
-            animationDelay: "120ms",
-            fontWeight: 400,
-          }}
-        >
-          Paste your opportunity emails. KaamAsaan scores every scholarship,
+        <p className="animate-fade-up" style={{
+          fontSize: "1.0625rem",
+          color: "rgba(255,255,255,0.55)",
+          lineHeight: 1.65,
+          maxWidth: 500,
+          marginBottom: 40,
+          animationDelay: "100ms",
+          fontWeight: 400,
+        }}>
+          Paste your opportunity emails. KaamAsaan ranks every scholarship,
           internship, and fellowship against your profile — tells you exactly
           what to apply to first.
         </p>
 
-        {/* CTA group */}
-        <div
-          className="animate-fade-up"
-          style={{ display: "flex", alignItems: "center", gap: 12, animationDelay: "180ms" }}
-        >
-          <button
-            onClick={onGetStarted}
-            className="btn-primary"
-            style={{ padding: "10px 20px", fontSize: "0.9375rem", gap: 8 }}
-          >
-            Analyze My Emails
-            <ArrowRight size={15} />
+        {/* CTAs */}
+        <div className="animate-fade-up" style={{
+          display: "flex", alignItems: "center", gap: 12,
+          animationDelay: "150ms",
+        }}>
+          <button onClick={onGetStarted} className="btn-primary" style={{ padding: "12px 24px", fontSize: "1rem", gap: 8 }}>
+            Analyze My Emails <ArrowRight size={16} />
           </button>
-          <button
-            onClick={onGetStarted}
-            className="btn-ghost"
-            style={{ fontSize: "0.9375rem", color: "#71717a" }}
-          >
-            View Demo →
+          <button onClick={onGetStarted} className="btn-ghost" style={{ fontSize: "1rem" }}>
+            View demo →
           </button>
         </div>
 
         {/* Stats */}
-        <div
-          className="animate-fade-up"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 32,
-            marginTop: 56,
-            paddingTop: 32,
-            borderTop: "1px solid rgba(255,255,255,0.06)",
-            animationDelay: "240ms",
-          }}
-        >
+        <div className="animate-fade-up" style={{
+          display: "flex", alignItems: "center", gap: 40, marginTop: 64,
+          paddingTop: 32,
+          borderTop: "1px solid rgba(255,255,255,0.1)",
+          animationDelay: "200ms",
+        }}>
           {[
-            { value: "< 15s",   label: "ranked results" },
-            { value: "4×",      label: "scoring factors" },
-            { value: "1-click", label: "cover letter" },
-            { value: "bilingual", label: "English + Roman Urdu" },
-          ].map(({ value, label }) => (
-            <div key={label}>
-              <div style={{ fontSize: "1.125rem", fontWeight: 700, letterSpacing: "-0.03em", color: "#fafafa" }}>
-                {value}
-              </div>
-              <div style={{ fontSize: "0.75rem", color: "#52525b", marginTop: 2 }}>
-                {label}
-              </div>
+            { v: "< 15s",     l: "ranked results" },
+            { v: "4 factors", l: "scoring engine" },
+            { v: "1-click",   l: "cover letter" },
+            { v: "bilingual", l: "EN + Roman Urdu" },
+          ].map(({ v, l }) => (
+            <div key={l}>
+              <div style={{ fontSize: "1.25rem", fontWeight: 800, letterSpacing: "-0.04em", color: "#ffffff" }}>{v}</div>
+              <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.35)", marginTop: 2, letterSpacing: "0.02em" }}>{l}</div>
             </div>
           ))}
         </div>

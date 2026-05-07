@@ -2,164 +2,144 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Shadcn + Aceternity Design Tokens ──────────────── */
+/* ────────────────────────────────────────────────────────────
+   MONOCHROME SYSTEM — Black & White only. Zero exceptions.
+   ──────────────────────────────────────────────────────────── */
 :root {
-  /* shadcn/ui zinc palette — pure black foundation */
-  --background:    #09090b;
-  --foreground:    #fafafa;
-
-  --card:          #09090b;
-  --card-border:   rgba(255,255,255,0.08);
-
-  --muted:         #18181b;
-  --muted-fg:      #a1a1aa;
-
-  --border:        rgba(255,255,255,0.08);
-  --border-strong: rgba(255,255,255,0.15);
-  --input-bg:      rgba(255,255,255,0.04);
-
-  --accent:        #ffffff;
-  --accent-fg:     #09090b;
-
-  --primary:       #fafafa;
-  --primary-fg:    #18181b;
-
-  --secondary:     #27272a;
-  --secondary-fg:  #fafafa;
-
-  /* Score colours */
-  --score-high:  #22c55e;
-  --score-mid:   #f59e0b;
-  --score-low:   #ef4444;
-
-  /* Radii — shadcn uses very small radii */
-  --radius:    6px;
-  --radius-sm: 4px;
-  --radius-lg: 8px;
-
-  /* Transitions */
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --black:        #000000;
+  --white:        #ffffff;
+  --white-dim:    rgba(255,255,255,0.6);
+  --white-faint:  rgba(255,255,255,0.15);
+  --white-ghost:  rgba(255,255,255,0.06);
+  --border:       rgba(255,255,255,0.2);
+  --border-strong: #ffffff;
 }
 
-/* ── Reset ───────────────────────────────────────────── */
+/* ── Reset ─────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 14px;
   line-height: 1.5;
 }
 
-/* ── Scrollbar ───────────────────────────────────────── */
-::-webkit-scrollbar { width: 4px; height: 4px; }
+::selection { background: var(--white); color: var(--black); }
+
+::-webkit-scrollbar { width: 3px; height: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: #52525b; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 99px; }
 
-/* ── Selection ───────────────────────────────────────── */
-::selection { background: rgba(255,255,255,0.15); color: #fafafa; }
-
-/* ── Keyframes ───────────────────────────────────────── */
+/* ── Keyframes ─────────────────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-
-@keyframes rowSlide {
-  from { opacity: 0; transform: translateX(-6px); }
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(-4px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-
 @keyframes shimmer {
   0%   { background-position: -600px 0; }
   100% { background-position: 600px 0; }
 }
-
 @keyframes spin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0; }
+}
 
-/* ── Utility animations ──────────────────────────────── */
-.animate-fade-up     { animation: fadeUp 0.4s var(--ease) both; }
-.animate-fade-in     { animation: fadeIn 0.3s ease both; }
-.animate-row-in      { animation: rowSlide 0.3s var(--ease) both; }
-.animate-fade-slide-in { animation: fadeUp 0.35s ease both; }
-.animate-slide-up    { animation: fadeUp 0.4s ease both; }
-.animate-scale-in    { animation: fadeIn 0.25s ease both; }
-.animate-badge-pulse { animation: none; }
-.animate-float       { animation: none; }
-.animate-spin        { animation: spin 1s linear infinite; }
+/* ── Utility classes ───────────────────────────────────────── */
+.animate-fade-up      { animation: fadeUp 0.35s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-fade-in      { animation: fadeIn 0.25s ease both; }
+.animate-row-in       { animation: rowIn  0.25s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-fade-slide-in{ animation: fadeUp 0.3s ease both; }
+.animate-slide-up     { animation: fadeUp 0.35s ease both; }
+.animate-scale-in     { animation: fadeIn 0.2s ease both; }
+.animate-spin         { animation: spin 0.8s linear infinite; }
+.animate-badge-pulse  { animation: none; }
+.animate-float        { animation: none; }
 
-/* Stagger delays */
-.delay-0  { animation-delay: 0ms; }
-.delay-1  { animation-delay: 50ms; }
-.delay-2  { animation-delay: 100ms; }
-.delay-3  { animation-delay: 150ms; }
-.delay-4  { animation-delay: 200ms; }
-.delay-5  { animation-delay: 250ms; }
+.delay-0 { animation-delay: 0ms; }
+.delay-1 { animation-delay: 40ms; }
+.delay-2 { animation-delay: 80ms; }
+.delay-3 { animation-delay: 120ms; }
+.delay-4 { animation-delay: 160ms; }
+.delay-5 { animation-delay: 200ms; }
 
-/* ── Shimmer skeleton ────────────────────────────────── */
+/* ── Shimmer ────────────────────────────────────────────────── */
 .shimmer {
-  background: linear-gradient(90deg, #18181b 25%, #27272a 50%, #18181b 75%);
+  background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
   background-size: 1200px 100%;
   animation: shimmer 1.6s infinite;
 }
 
-/* ── shadcn/ui Button styles ─────────────────────────── */
+/* ── BUTTONS ─────────────────────────────────────────────────
+   Primary  = white bg, black text
+   Secondary = black bg, white border, white text → inverts on hover
+   Ghost    = transparent, white text
+   ────────────────────────────────────────────────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: var(--foreground);
-  color: var(--background);
+  background: var(--white);
+  color: var(--black);
   font-size: 0.875rem;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: var(--radius);
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: opacity 150ms ease, transform 150ms ease;
-  white-space: nowrap;
+  font-weight: 600;
   letter-spacing: -0.01em;
+  padding: 8px 18px;
+  border-radius: 4px;
+  border: 1px solid var(--white);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+  white-space: nowrap;
+  text-decoration: none;
 }
-.btn-primary:hover  { opacity: 0.9; }
-.btn-primary:active { transform: scale(0.98); }
-.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.btn-primary:hover {
+  background: var(--black);
+  color: var(--white);
+}
+.btn-primary:active  { transform: scale(0.98); }
+.btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: transparent;
-  color: var(--foreground);
+  background: var(--black);
+  color: var(--white);
   font-size: 0.875rem;
   font-weight: 500;
-  padding: 8px 16px;
-  border-radius: var(--radius);
+  letter-spacing: -0.01em;
+  padding: 8px 18px;
+  border-radius: 4px;
   border: 1px solid var(--border);
   cursor: pointer;
-  transition: background 150ms ease, border-color 150ms ease, transform 150ms ease;
-  letter-spacing: -0.01em;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  white-space: nowrap;
+  text-decoration: none;
 }
 .btn-secondary:hover {
-  background: var(--muted);
-  border-color: var(--border-strong);
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
 }
 .btn-secondary:active { transform: scale(0.98); }
 
@@ -168,48 +148,60 @@ body {
   align-items: center;
   gap: 6px;
   background: transparent;
-  color: var(--muted-fg);
+  color: var(--white-dim);
   font-size: 0.875rem;
   font-weight: 400;
   padding: 6px 10px;
-  border-radius: var(--radius);
+  border-radius: 4px;
   border: none;
   cursor: pointer;
-  transition: background 150ms ease, color 150ms ease;
+  transition: color 120ms ease;
 }
-.btn-ghost:hover {
-  background: var(--muted);
-  color: var(--foreground);
-}
+.btn-ghost:hover { color: var(--white); }
 
-/* ── shadcn Input ────────────────────────────────────── */
+/* ── INPUTS (white bg, black text) ───────────────────────────
+   This is what the user explicitly asked for.
+   ──────────────────────────────────────────────────────────── */
 .input-field {
   width: 100%;
-  background: var(--input-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--white);
+  border: 1px solid var(--white);
+  border-radius: 4px;
   padding: 8px 12px;
-  color: var(--foreground);
+  color: var(--black);
   font-size: 0.875rem;
   font-family: inherit;
   outline: none;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition: box-shadow 120ms ease;
   resize: none;
 }
-.input-field::placeholder { color: #52525b; }
+.input-field::placeholder { color: rgba(0,0,0,0.35); }
 .input-field:focus {
-  border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.4);
 }
 
-/* ── shadcn Card ─────────────────────────────────────── */
+/* Also style native selects inside forms */
+select.input-field {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+/* ── CARD / CONTAINER ────────────────────────────────────────
+   Black bg, white 1px border
+   ──────────────────────────────────────────────────────────── */
 .card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
+  background: var(--black);
+  border: 1px solid var(--border);
+  border-radius: 6px;
 }
 
-/* ── shadcn Badge ────────────────────────────────────── */
+/* ── BADGE ────────────────────────────────────────────────────
+   White border, white text on black
+   ──────────────────────────────────────────────────────────── */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -218,21 +210,31 @@ body {
   padding: 2px 8px;
   border-radius: 99px;
   border: 1px solid var(--border);
-  background: var(--muted);
-  color: var(--muted-fg);
+  background: transparent;
+  color: var(--white-dim);
   letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
-.badge-success { background: rgba(34,197,94,0.1);  color: var(--score-high); border-color: rgba(34,197,94,0.2); }
-.badge-warning { background: rgba(245,158,11,0.1); color: var(--score-mid);  border-color: rgba(245,158,11,0.2); }
-.badge-danger  { background: rgba(239,68,68,0.1);  color: var(--score-low);  border-color: rgba(239,68,68,0.2); }
-
-/* Score badge */
-.score-badge  { display: inline-flex; align-items: center; justify-content: center; font-size: 0.6875rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; font-variant-numeric: tabular-nums; }
-.score-high   { background: rgba(34,197,94,0.1);  color: var(--score-high); border: 1px solid rgba(34,197,94,0.2); }
-.score-mid    { background: rgba(245,158,11,0.1); color: var(--score-mid);  border: 1px solid rgba(245,158,11,0.2); }
-.score-low    { background: rgba(239,68,68,0.1);  color: var(--score-low);  border: 1px solid rgba(239,68,68,0.2); }
+/* Score badges — monochrome only */
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--white);
+  font-variant-numeric: tabular-nums;
+  min-width: 34px;
+}
+/* Keep class names but override colors to white */
+.score-high { background: transparent; color: var(--white); border-color: var(--border); }
+.score-mid  { background: transparent; color: var(--white); border-color: var(--border); }
+.score-low  { background: transparent; color: var(--white); border-color: var(--border); }
 
 .type-pill {
   display: inline-flex;
@@ -242,55 +244,48 @@ body {
   padding: 2px 8px;
   border-radius: 99px;
   border: 1px solid var(--border);
-  color: var(--muted-fg);
-  background: var(--muted);
+  color: var(--white-dim);
+  background: transparent;
   white-space: nowrap;
 }
 
-/* ── List row ────────────────────────────────────────── */
+/* ── LIST ROW ─────────────────────────────────────────────── */
 .list-row {
   display: flex;
   align-items: center;
   padding: 10px 16px;
-  border-bottom: 1px solid var(--border);
-  transition: background 100ms ease;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   cursor: pointer;
+  transition: background 100ms ease;
 }
-.list-row:hover { background: rgba(255,255,255,0.03); }
+.list-row:hover { background: rgba(255,255,255,0.04); }
 .list-row:last-child { border-bottom: none; }
 
-/* ── Separator ───────────────────────────────────────── */
-.separator { width: 100%; height: 1px; background: var(--border); }
-
-/* ── Label ───────────────────────────────────────────── */
+/* ── LABEL ────────────────────────────────────────────────── */
 .label {
   font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #52525b;
+  color: var(--white-dim);
 }
 
-/* ── Misc ────────────────────────────────────────────── */
-.card-hover { transition: border-color 150ms ease; cursor: pointer; }
-.card-hover:hover { border-color: var(--border-strong) !important; }
+/* ── MISC ─────────────────────────────────────────────────── */
+.card-hover { transition: border-color 120ms ease; }
+.card-hover:hover { border-color: var(--white) !important; }
 
-.glass       { background: rgba(9,9,11,0.8); backdrop-filter: blur(12px); border: 1px solid var(--border); }
-.glass-strong{ background: rgba(9,9,11,0.95); backdrop-filter: blur(20px); border: 1px solid var(--border); }
+.glass       { background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); border: 1px solid var(--border); }
+.glass-strong{ background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border: 1px solid var(--border); }
 
+/* Subtle dot grid for hero */
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-/* Gradient text for hero */
-.gradient-text-animated {
-  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.btn-glow { transition: opacity 150ms ease, transform 150ms ease; }
+/* Legacy classes — overridden to monochrome */
+.gradient-text-animated { color: var(--white); background: none; -webkit-text-fill-color: var(--white); }
+.btn-glow { transition: opacity 120ms ease, transform 120ms ease; }
 .btn-glow:hover { opacity: 0.85; transform: translateY(-1px); }
 .glow-violet { box-shadow: none; }
+.animate-orb-1, .animate-orb-2, .animate-orb-3 { display: none; }
