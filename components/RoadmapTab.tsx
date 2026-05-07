@@ -11,13 +11,6 @@ interface RoadmapTabProps {
   profile: StudentProfile;
 }
 
-const PHASE_COLORS = [
-  { border: "border-violet-500/40", bg: "bg-violet-500/10", dot: "bg-violet-500", text: "text-violet-400", num: "bg-violet-500/20 text-violet-300", glow: "shadow-violet-500/20" },
-  { border: "border-cyan-500/40",   bg: "bg-cyan-500/10",   dot: "bg-cyan-500",   text: "text-cyan-400",   num: "bg-cyan-500/20 text-cyan-300",   glow: "shadow-cyan-500/20" },
-  { border: "border-emerald-500/40",bg: "bg-emerald-500/10",dot: "bg-emerald-500",text: "text-emerald-400",num: "bg-emerald-500/20 text-emerald-300",glow: "shadow-emerald-500/20" },
-  { border: "border-amber-500/40",  bg: "bg-amber-500/10",  dot: "bg-amber-500",  text: "text-amber-400",  num: "bg-amber-500/20 text-amber-300",  glow: "shadow-amber-500/20" },
-];
-
 export default function RoadmapTab({ profile }: RoadmapTabProps) {
   const [selectedRole, setSelectedRole] = useState<TargetRole | "">("");
   const [loading, setLoading] = useState(false);
@@ -29,8 +22,11 @@ export default function RoadmapTab({ profile }: RoadmapTabProps) {
     if (!selectedRole || loading) return;
     setLoading(true); setError(null); setRoadmap(null);
     try {
-      const res = await fetch("/api/roadmap", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ role: selectedRole, profile }) });
-      if (!res.ok) throw new Error("Failed to generate roadmap");
+      const res = await fetch("/api/roadmap", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role: selectedRole, profile }),
+      });
+      if (!res.ok) throw new Error("Failed");
       setRoadmap(await res.json() as RoadmapResponse);
       setExpandedPhase(0);
     } catch { setError("Could not generate roadmap. Please try again."); }
@@ -38,81 +34,227 @@ export default function RoadmapTab({ profile }: RoadmapTabProps) {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <div className="flex items-center gap-4 mb-8">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-violet-500/30"><Map size={22} className="text-white" /></div>
-        <div><h2 className="text-xl font-bold text-white">Career Roadmap</h2><p className="text-sm text-slate-500">Pakistan-specific · Phase-by-phase · Real companies & salaries</p></div>
+    <div style={{ maxWidth: 720, margin: "0 auto", padding: "32px 24px" }}>
+
+      {/* Header — white square icon, no gradient */}
+      <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 32 }}>
+        <div style={{
+          width: 44, height: 44,
+          borderRadius: "var(--radius-8)",
+          background: "#ffffff",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          flexShrink: 0,
+        }}>
+          <Map size={20} style={{ color: "#000000" }} />
+        </div>
+        <div>
+          <h2 style={{ fontSize: "1.125rem", fontWeight: 680, color: "var(--color-text-primary)", letterSpacing: "-0.03em", lineHeight: 1.2 }}>
+            Career Roadmap
+          </h2>
+          <p style={{ fontSize: "0.8125rem", color: "var(--color-text-quaternary)", marginTop: 2 }}>
+            Pakistan-specific · Phase-by-phase · Real companies & salaries
+          </p>
+        </div>
       </div>
 
       <AnimatePresence mode="wait">
         {!roadmap ? (
-          <motion.div key="selector" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="space-y-6">
+          <motion.div key="selector" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}
+            style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+
+            {/* Role grid */}
             <div>
-              <p className="text-sm text-slate-400 mb-4">Select your target role to generate a personalized roadmap:</p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {ROLES.map((role) => (
-                  <button key={role} onClick={() => setSelectedRole(role)}
+              <p style={{ fontSize: "0.875rem", color: "var(--color-text-tertiary)", marginBottom: 14 }}>
+                Select your target role:
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 8 }}>
+                {ROLES.map(role => (
+                  <button
+                    key={role}
+                    onClick={() => setSelectedRole(role)}
                     style={{
-                      textAlign: "left", fontSize: "0.75rem", padding: "10px 12px",
-                      borderRadius: "var(--radius-6)", border: "1px solid",
-                      transition: "all 150ms ease", cursor: "pointer",
+                      textAlign: "left",
+                      fontSize: "0.8125rem",
+                      padding: "10px 12px",
+                      borderRadius: "var(--radius-6)",
+                      border: "1px solid",
+                      cursor: "pointer",
+                      transition: "all 120ms ease",
                       background: selectedRole === role ? "#ffffff" : "rgba(255,255,255,0.03)",
                       color: selectedRole === role ? "#000000" : "var(--color-text-tertiary)",
                       borderColor: selectedRole === role ? "#ffffff" : "var(--color-border-primary)",
-                    }}>
+                      fontWeight: selectedRole === role ? 510 : 400,
+                    }}
+                  >
                     {role}
                   </button>
                 ))}
               </div>
             </div>
-            {error && <p style={{ fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>{error}</p>}
-            <button onClick={generate} disabled={!selectedRole || loading}
+
+            {error && (
+              <p style={{ fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>{error}</p>
+            )}
+
+            {/* Generate button — white bg, black text */}
+            <button
+              onClick={generate}
+              disabled={!selectedRole || loading}
               className="btn-invert"
-              style={{ width: "100%", padding: "12px 20px", fontSize: "1rem", borderRadius: "var(--radius-8)", gap: 8, opacity: (!selectedRole || loading) ? 0.35 : 1, cursor: (!selectedRole || loading) ? "not-allowed" : "pointer" }}>
-              {loading ? <><Loader2 size={16} className="animate-spin" /> Generating roadmap...</> : <><TrendingUp size={16} /> Generate Roadmap</>}
+              style={{
+                width: "100%", padding: "13px 20px",
+                fontSize: "1rem", gap: 8,
+                borderRadius: "var(--radius-8)",
+                opacity: (!selectedRole || loading) ? 0.35 : 1,
+                cursor: (!selectedRole || loading) ? "not-allowed" : "pointer",
+              }}
+            >
+              {loading
+                ? <><Loader2 size={16} className="animate-spin" /> Generating your roadmap...</>
+                : <><TrendingUp size={16} /> Generate Roadmap</>
+              }
             </button>
           </motion.div>
         ) : (
-          <motion.div key="roadmap" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="space-y-5">
-            <div className="glass border border-violet-500/20 rounded-2xl p-5 space-y-2">
-              <div className="flex items-center justify-between flex-wrap gap-2">
-                <p className="font-bold text-white text-lg">{roadmap.role}</p>
-                <span className="text-xs bg-violet-500/20 text-violet-300 px-3 py-1.5 rounded-full border border-violet-500/30 font-semibold">{roadmap.totalDuration}</span>
+          <motion.div key="roadmap" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}
+            style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+
+            {/* Summary */}
+            <div style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid var(--color-border-primary)",
+              borderRadius: "var(--radius-8)",
+              padding: "16px 18px",
+            }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8, marginBottom: 8 }}>
+                <p style={{ fontSize: "1.125rem", fontWeight: 680, color: "var(--color-text-primary)", letterSpacing: "-0.03em" }}>
+                  {roadmap.role}
+                </p>
+                <span className="badge">{roadmap.totalDuration}</span>
               </div>
-              <p className="text-sm text-slate-400 leading-relaxed">{roadmap.summary}</p>
+              <p style={{ fontSize: "0.875rem", color: "var(--color-text-tertiary)", lineHeight: 1.65 }}>
+                {roadmap.summary}
+              </p>
             </div>
 
-            <div className="space-y-3">
+            {/* Phases */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {roadmap.phases.map((phase, i) => {
-                const c = PHASE_COLORS[i % PHASE_COLORS.length];
                 const isExpanded = expandedPhase === i;
                 return (
-                  <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} className={`border rounded-2xl overflow-hidden ${c.border}`}>
-                    <button className={`w-full flex items-center gap-3 px-5 py-4 text-left ${c.bg} hover:opacity-90 transition-opacity`} onClick={() => setExpandedPhase(isExpanded ? null : i)}>
-                      <span className={`w-8 h-8 rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0 ${c.num}`}>{phase.phase}</span>
-                      <div className="flex-1 min-w-0"><p className="font-semibold text-white">{phase.title}</p><p className="text-xs text-slate-500 mt-0.5">{phase.duration}</p></div>
-                      <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${c.num}`}>{phase.salaryRange}</span>
-                      <ChevronDown size={15} className={`text-slate-500 flex-shrink-0 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.06 }}
+                    style={{ border: "1px solid var(--color-border-primary)", borderRadius: "var(--radius-8)", overflow: "hidden" }}
+                  >
+                    <button
+                      onClick={() => setExpandedPhase(isExpanded ? null : i)}
+                      style={{
+                        width: "100%", display: "flex", alignItems: "center", gap: 12,
+                        padding: "12px 16px",
+                        background: isExpanded ? "rgba(255,255,255,0.05)" : "transparent",
+                        border: "none", cursor: "pointer", textAlign: "left",
+                        transition: "background 100ms ease",
+                      }}
+                    >
+                      <span style={{
+                        width: 26, height: 26, borderRadius: "var(--radius-4)", flexShrink: 0,
+                        background: isExpanded ? "#ffffff" : "rgba(255,255,255,0.08)",
+                        color: isExpanded ? "#000000" : "var(--color-text-tertiary)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        fontSize: "0.6875rem", fontWeight: 680,
+                      }}>
+                        {phase.phase}
+                      </span>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <p style={{ fontSize: "0.9375rem", fontWeight: 510, color: "var(--color-text-primary)", letterSpacing: "-0.01em" }}>
+                          {phase.title}
+                        </p>
+                        <p style={{ fontSize: "0.75rem", color: "var(--color-text-quaternary)", marginTop: 1 }}>
+                          {phase.duration}
+                        </p>
+                      </div>
+                      <span className="badge" style={{ flexShrink: 0 }}>{phase.salaryRange}</span>
+                      <ChevronDown size={14} style={{
+                        color: "var(--color-text-quaternary)",
+                        transform: isExpanded ? "rotate(180deg)" : "none",
+                        transition: "transform 200ms ease",
+                        flexShrink: 0,
+                      }} />
                     </button>
+
                     <AnimatePresence>
                       {isExpanded && (
-                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden">
-                          <div className="px-5 pb-5 pt-4 space-y-4 border-t border-white/5">
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          style={{ overflow: "hidden" }}
+                        >
+                          <div style={{ padding: "14px 16px 16px", borderTop: "1px solid var(--color-line-tertiary)", display: "flex", flexDirection: "column", gap: 12 }}>
+
+                            {/* Skills */}
                             <div>
-                              <p className={`text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5 ${c.text}`}><BookOpen size={11} /> Skills to acquire</p>
-                              <div className="flex flex-wrap gap-1.5">{phase.skills.map((s, j) => <span key={j} className={`text-xs px-2.5 py-1 rounded-full border ${c.border} ${c.bg} ${c.text}`}>{s}</span>)}</div>
+                              <div className="label" style={{ marginBottom: 7, display: "flex", alignItems: "center", gap: 4 }}>
+                                <BookOpen size={9} /> Skills to acquire
+                              </div>
+                              <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                                {phase.skills.map((s, j) => (
+                                  <span key={j} style={{
+                                    fontSize: "0.6875rem", padding: "2px 8px",
+                                    borderRadius: "var(--radius-rounded)",
+                                    border: "1px solid var(--color-border-primary)",
+                                    color: "var(--color-text-secondary)",
+                                    background: "rgba(255,255,255,0.04)",
+                                  }}>{s}</span>
+                                ))}
+                              </div>
                             </div>
+
+                            {/* Actions */}
                             <div>
-                              <p className={`text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5 ${c.text}`}><Target size={11} /> Actions</p>
-                              <ul className="space-y-1.5">{phase.actions.map((a, j) => <li key={j} className="flex items-start gap-2 text-sm text-slate-300"><span className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${c.dot}`} />{a}</li>)}</ul>
+                              <div className="label" style={{ marginBottom: 7, display: "flex", alignItems: "center", gap: 4 }}>
+                                <Target size={9} /> Actions
+                              </div>
+                              <ul style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                                {phase.actions.map((a, j) => (
+                                  <li key={j} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: "0.8125rem", color: "var(--color-text-secondary)" }}>
+                                    <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ffffff", flexShrink: 0, marginTop: 6 }} />
+                                    {a}
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
+
+                            {/* Resources */}
                             <div>
-                              <p className={`text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5 ${c.text}`}><BookOpen size={11} /> Resources</p>
-                              <ul className="space-y-1 text-sm text-slate-400">{phase.resources.map((r, j) => <li key={j} className="flex items-start gap-2"><span className="text-slate-600">→</span>{r}</li>)}</ul>
+                              <div className="label" style={{ marginBottom: 7, display: "flex", alignItems: "center", gap: 4 }}>
+                                <BookOpen size={9} /> Resources
+                              </div>
+                              <ul style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                                {phase.resources.map((r, j) => (
+                                  <li key={j} style={{ display: "flex", gap: 7, fontSize: "0.8125rem", color: "var(--color-text-tertiary)" }}>
+                                    <span style={{ color: "var(--color-text-quaternary)", flexShrink: 0 }}>→</span>
+                                    {r}
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
-                            <div className={`rounded-xl px-4 py-3 ${c.bg} border ${c.border}`}>
-                              <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Milestone</p>
-                              <p className="text-sm text-white font-medium">{phase.milestone}</p>
+
+                            {/* Milestone */}
+                            <div style={{
+                              padding: "10px 12px",
+                              background: "rgba(255,255,255,0.04)",
+                              border: "1px solid var(--color-border-primary)",
+                              borderRadius: "var(--radius-6)",
+                            }}>
+                              <div className="label" style={{ marginBottom: 4 }}>Milestone</div>
+                              <p style={{ fontSize: "0.875rem", color: "var(--color-text-primary)", fontWeight: 510 }}>
+                                {phase.milestone}
+                              </p>
                             </div>
                           </div>
                         </motion.div>
@@ -123,18 +265,41 @@ export default function RoadmapTab({ profile }: RoadmapTabProps) {
               })}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="glass border border-white/10 rounded-2xl p-5">
-                <p className="text-xs text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-1.5"><Building2 size={11} /> Top companies hiring</p>
-                <ul className="space-y-2">{roadmap.topCompanies.map((c, i) => <li key={i} className="text-sm text-slate-300 flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-violet-400 flex-shrink-0" />{c}</li>)}</ul>
+            {/* Companies + Global */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <div style={{ padding: "14px 16px", background: "rgba(255,255,255,0.03)", border: "1px solid var(--color-border-primary)", borderRadius: "var(--radius-8)" }}>
+                <div className="label" style={{ marginBottom: 10, display: "flex", alignItems: "center", gap: 4 }}>
+                  <Building2 size={9} /> Top companies
+                </div>
+                <ul style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  {roadmap.topCompanies.map((c, i) => (
+                    <li key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8125rem", color: "var(--color-text-secondary)" }}>
+                      <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ffffff", flexShrink: 0 }} />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="glass border border-white/10 rounded-2xl p-5">
-                <p className="text-xs text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-1.5"><Globe size={11} /> Global opportunities</p>
-                <ul className="space-y-2">{roadmap.globalOpportunities.map((o, i) => <li key={i} className="text-sm text-slate-300 flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />{o}</li>)}</ul>
+              <div style={{ padding: "14px 16px", background: "rgba(255,255,255,0.03)", border: "1px solid var(--color-border-primary)", borderRadius: "var(--radius-8)" }}>
+                <div className="label" style={{ marginBottom: 10, display: "flex", alignItems: "center", gap: 4 }}>
+                  <Globe size={9} /> Global opportunities
+                </div>
+                <ul style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  {roadmap.globalOpportunities.map((o, i) => (
+                    <li key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8125rem", color: "var(--color-text-secondary)" }}>
+                      <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ffffff", flexShrink: 0 }} />
+                      {o}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            <button onClick={() => { setRoadmap(null); setSelectedRole(""); }} className="w-full text-sm text-slate-500 hover:text-slate-300 py-3 transition-colors border border-white/5 rounded-xl hover:border-white/10">
+            <button
+              onClick={() => { setRoadmap(null); setSelectedRole(""); }}
+              className="btn-ghost"
+              style={{ width: "100%", justifyContent: "center", padding: 10 }}
+            >
               ← Generate for a different role
             </button>
           </motion.div>
