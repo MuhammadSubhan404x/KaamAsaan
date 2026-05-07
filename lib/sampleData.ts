@@ -1,220 +1,189 @@
 import type { OpportunityType } from "./types";
 
 export const SAMPLE_EMAILS_ARRAY: string[] = [
-  `---------- Forwarded message ---------
-From: HEC Scholarships <scholarships@hec.gov.pk>
-To: students@nu.edu.pk
-Date: Mon, 14 Apr 2026 09:12:00 +0500
-Subject: HEC Need-Based Scholarship 2026 – Applications Open
+  `From: Team atomcamp <admissions@atomcamp.com>
+Date: Thu, May 7, 2026 at 8:23 AM
+Subject: Registration Successful | National AI Hackathon'26 - LAHORE | atomcamp
+To: subhan404x@gmail.com
 
-Dear Students,
+Thank you for signing up for the National AI Hackathon 2026 by atomcamp.
 
-The Higher Education Commission of Pakistan is pleased to announce the HEC Need-Based Scholarship Program 2026 for undergraduate students currently enrolled in HEC-recognized universities.
+Congratulations! Your application for the National AI Hackathon '26 has been reviewed and we are excited to confirm your spot at the Lahore regional round.
 
-Eligibility:
-- Pakistani national enrolled in BS/BE program
-- Minimum CGPA: 2.5
-- Annual family income below PKR 600,000
-- Semester 2 through 8
+Venue: FAST, Lahore (852-B Milaad St, Block B Faisal Town, Lahore)
+Dates: 7 May 2026
+Start Time: 10:00 AM - 04:00 PM
 
-Required Documents:
-- CNIC copy
-- Income certificate from NADRA / Union Council
-- Latest academic transcripts
-- Bank statement (last 6 months)
-- Undertaking form (available on HEC portal)
+Important:
+Please make sure to bring your laptop - it is essential for the hackathon.
+Bring your CNIC to show at gate for entry
 
-Stipend: PKR 10,000 per month + tuition waiver
-Deadline: 30 April 2026
+We look forward to seeing what you build.
 
-Apply at: https://scholarships.hec.gov.pk/need-based-2026
-Contact: scholarships@hec.gov.pk`,
+See you in Lahore!
 
-  `---------- Forwarded message ---------
-From: USEFP Fulbright <fulbright@usefpakistan.org>
-To: highachievers-list@gmail.com
-Date: Tue, 15 Apr 2026 11:00:00 +0500
-Subject: Fulbright Scholarship 2026-27 – Last Call for Applications
+Best regards,
+Team atomcamp`,
 
-The United States Educational Foundation in Pakistan (USEFP) invites applications for the Fulbright Scholarship Program 2026-27.
+  `From: Google Events <no-reply-eventsatgoogle@google.com>
+Date: Wed, May 6, 2026 at 12:02 PM
+Subject: AI Seekho Hackathon: Registration is LIVE! (PKR 2.5 Million Prize Pool)
+To: subhan404x@gmail.com
 
-Program: MS or PhD in the USA — fully funded
-Eligibility:
-- Pakistani citizen
-- Minimum 16 years of education (BS/BE degree)
-- Minimum CGPA: 3.0 out of 4.0
-- No prior US degree
+Hey Muhammad,
 
-Award Covers: Full tuition, living allowance, return airfare, health insurance, book allowance
+Are you ready to build an impactful mobile app using Google Antigravity and win from a prize pool of PKR 2.5 Million?
 
-Required Documents:
-- Statement of Purpose (500–700 words)
-- Three recommendation letters
-- Transcripts from all universities attended
-- GRE scores (optional but preferred)
-- TOEFL/IELTS (if available)
+Now that Phase 1 has officially concluded, we're going full throttle into the next stage of the movement. This is your chance to show the world what you've got by participating in the #AISeekho2026 Hackathon.
 
-Application Deadline: 1 May 2026
-Apply: https://www.usefpakistan.org/fulbright
-Contact: fulbright@usefpakistan.org`,
+Register your team here: goo.gle/aiseekho2026-hackathon
 
-  `---------- Forwarded message ---------
-From: Tintash Careers <careers@tintash.com>
-To: cs-students@nu.edu.pk
-Date: Wed, 16 Apr 2026 14:30:00 +0500
-Subject: Paid Software Engineer Intern – Tintash Summer 2026 (Lahore)
+Join us on May 6th, 2026 @ 9.30 pm for a virtual info session for the hackathon.
 
-Hi,
+Important Notes:
+- Separate Registration: The hackathon phase is completely independent. Even if you registered for Phase 1, you must register your team at the link above to compete.
+- Age Requirement: Participants must be 18+ to apply.
+- The Format: The hackathon consists of two rounds Regional (Online) and the National Final (Physical in Islamabad).
+- New Challenges: You will address a fresh set of challenges specifically designed for this phase.
 
-Tintash is hiring Software Engineer Interns for Summer 2026. We're a Lahore-based award-winning product studio that has shipped products for clients in the US and Europe.
+Application Deadline: May 11, 2026
 
-Role: Software Engineer Intern (3 months, on-site)
-Location: Lahore – DHA Phase 6
-Stipend: PKR 45,000/month
+Organizers: AISeekho, Google, and Telenor Pakistan.
 
-Requirements:
-- CS / SE / IT undergraduate (Semester 4 or above)
-- Strong in Python, React, or Node.js
-- Minimum CGPA: 3.0
+Prize Pool: PKR 2,500,000
 
-To Apply: Send your CV and GitHub profile to careers@tintash.com
-Subject line: "SWE Intern Summer 2026 – [Your Name]"
-Deadline: 25 April 2026`,
+Register: goo.gle/aiseekho2026-hackathon
 
-  `---------- Forwarded message ---------
-From: Google Developer Student Clubs <gdsc-pakistan@googlegroups.com>
-To: university-students@googlegroups.com
-Date: Thu, 10 Apr 2026 10:00:00 +0500
-Subject: Google Solution Challenge 2026 – Register Before 22 April
+Cheers,
+#AISeekho Team`,
 
-Hello Developers,
+  `From: Aspire Pakistan <no-reply@aspirepk.org>
+Date: Thu, Mar 26, 2026 at 5:52 PM
+Subject: Welcome to HEC Generative AI Training – Action Required
+To: subhan404x@gmail.com
 
-The Google Solution Challenge 2026 is open for student teams worldwide. Build solutions for the UN Sustainable Development Goals using Google technologies.
+Action Required Before March 29th
 
-Who can participate:
-- University students (undergraduate or postgraduate)
-- Teams of 1–4 members
-- GDSC members preferred (free to join at gdsc.community.dev)
+Dear Muhammad Subhan,
 
-Technologies: Android, Flutter, Firebase, Google Cloud, TensorFlow, Gemini AI
+Congratulations! You are among the third batch of 14,000 registered participants selected for the Pak Angels' organized HEC Generative AI Training, Cohort 3, beginning on Sunday, March 29th, 2026, at 8:00 PM PKT.
 
-Top 3 global teams: $3,000 USD + trip to Google HQ
-Top 10 teams: Recognition + swag
+To get the most out of this program and become eligible for the Generative AI Application Development Skill Certificate issued from Silicon Valley, USA, please complete the following steps:
 
-Registration Deadline: 22 April 2026
-Final Submission: 28 May 2026
-Register: https://developers.google.com/community/gdsc-solution-challenge`,
+Step 1: Log in to the Assessment & Certificates System
+Use the link: https://quiz.ideagist.com/pahome/
 
-  `---------- Forwarded message ---------
-From: MLH Fellowship <fellowship@mlh.io>
-To: developers-pakistan@list.io
-Date: Fri, 11 Apr 2026 08:00:00 +0500
-Subject: MLH Fellowship Spring/Summer 2026 – Stipend $5,000 – Apply Now
+Step 2: Join the Training Sessions Online
+Zoom Link (First 1,000 Participants Only): https://aspirepk.org/pakangels-genai-session
+YouTube Livestream Link: https://www.youtube.com/@ASPIREPakistanOfficial/streams
 
-MLH Fellowship applications for Spring/Summer 2026 batch are open!
+Step 3: Take Weekly Quizzes
+5 Weekly and Grand Quizzes are mandatory to strengthen your learning.
+Your performance will directly count toward earning your Generative AI Application Development Skill Certificate.
 
-About: 12-week remote open-source fellowship used by thousands of students globally.
+Step 4: Participate in the Hackathon (Week 6)
+At the end of the training, you will join a 48-hour Hackathon during the sixth weekend of the training program.
 
-Tracks:
-- Open Source (contribute to top GitHub repos — Mozilla, Meta, etc.)
-- Explorer (build your own project with a mentor)
-- Production Engineering (partner with companies like Cloudflare, GitHub)
+This training is proudly organized by Pak Angels, Silicon Valley, USA, in collaboration with iCodeGuru and Aspire Pakistan, sponsored by UET Lahore Endowment Fund (ULEFUSA).
 
-Stipend: $5,000 for 12 weeks (remote)
-Duration: June – August 2026
-Location: Fully remote — open to Pakistani students
+Best regards,
+Mohammad Anwar Khan
+Founder & President, Pak Angels, Silicon Valley, USA`,
 
-Eligibility: Currently enrolled student OR recent graduate (within 1 year)
-No CGPA minimum requirement. Strong GitHub portfolio preferred.
+  `From: Global Certifications <certifications@pitb.gov.pk>
+Date: Thu, Apr 16, 2026 at 3:31 PM
+Subject: [Global IT Certifications] You Have Been Selected!
+To: subhan404x@gmail.com
 
-Deadline: 10 May 2026
-Apply: https://fellowship.mlh.io`,
+Dear Muhammad Subhan,
 
-  `---------- Forwarded message ---------
-From: noreply@udemy.com
-To: subscriber@gmail.com
-Date: Sat, 12 Apr 2026 09:00:00 +0500
-Subject: 🔥 FLASH SALE: ALL Courses Just PKR 449 – TODAY ONLY!
+Congratulations! You have been selected for Global IT Certifications Program.
 
-Hi there,
+You can now login to the Global IT Certifications Portal using your same username and password and upload your payment proof and exam date.
 
-Don't miss our BIGGEST sale of the year! Every course on Udemy is just PKR 449 today only.
+Please carefully re-examine your selected certification and only upload payment proof of the selected certification. In case of discrepancy your payment will not be reimbursed.
 
-Top picks:
-🎓 Python for Data Science – was PKR 8,999
-🎓 Complete Web Developer Bootcamp – was PKR 9,499
-🎓 Machine Learning A-Z – was PKR 10,999
+IMPORTANT: You have only 30 days to select an exam date and submit your payment proof otherwise your selection will be cancelled.
 
-Sale ends TONIGHT at midnight!
-Use code: FLASH449
+Portal: https://quiz.ideagist.com/pahome/
 
-Shop now: https://www.udemy.com/deals
-Unsubscribe | Privacy Policy | Terms`,
+In case of any ambiguity, please feel free to email us at info.certifications@pitb.gov.pk or reach us at +92-42-99000000 (ext. 1902 or 1203)
 
-  `---------- Forwarded message ---------
-From: NUST SEECS Research Office <research@seecs.nust.edu.pk>
-To: ml-students@seecs.nust.edu.pk
-Date: Mon, 7 Apr 2026 15:00:00 +0500
-Subject: Research Assistantship – AI & NLP Lab, NUST SEECS
+Best Regards,
+Team Global IT Certifications Program
+A project of Government of the Punjab`,
 
-The AI & NLP Research Lab at NUST SEECS invites applications for Research Assistantship positions.
+  `From: Yutori <notifications@yutori.com>
+Date: Wed, May 6, 2026 at 3:24 AM
+Subject: [Scout] Time-sensitive AI hackathons now open in Lahore
+To: subhan404x@gmail.com
 
-Position: Research Assistant (part-time or full-time)
-Lab: AI & NLP Lab, School of Electrical Engineering & Computer Science
-Supervisor: Dr. Awais Athar
+LOCAL AND ONLINE AI OPPORTUNITIES
 
-Requirements:
-- Strong background in Machine Learning, NLP, Python, PyTorch or TensorFlow
-- Minimum CGPA: 3.5
-- Must be enrolled in BS or MS at NUST
+Time-sensitive AI hackathons now open in Lahore
 
-Stipend: PKR 20,000/month (after 3-month probation)
-Duration: 6 months, renewable
-Deadline: Rolling admissions — apply ASAP
+I'm prioritizing two immediate opportunities aligned with your focus on Lahore and undergrad-friendly AI events.
 
-Send CV + 1-page research statement to: research@seecs.nust.edu.pk`,
+Happening now — The National AI Hackathon '26 (Lahore)
+Organizer: atomcamp with FAST Lahore.
+Location: FAST NUCES, Lahore Campus.
+Dates: May 6-7, 2026; registration still open.
+Format: Day 1 workshop on prompt engineering, LangChain, RAG, multi-agent systems, and Gradio; Day 2 hackathon tackling education, healthcare, agriculture, and civic tech.
+Eligibility: Students with programming background and working Python knowledge; suitable for BS AI undergrads.
+Register: aihackathon.atomcamp.com
 
-  `---------- Forwarded message ---------
-From: Jazz Scholarships <scholarships@jazz.com.pk>
-To: students-pk@list.org
-Date: Sun, 6 Apr 2026 12:00:00 +0500
-Subject: Jazz STEM Scholarship 2026 – PKR 50,000 + Internship for Top STEM Students
+Next deadline — Google Antigravity Community Hackathon
+Organizers: AISeekho, Google, and Telenor Pakistan.
+Location: Remote/Hybrid (Pakistan-focused).
+Application deadline: May 11, 2026.
+Challenge: Build agent-driven AI solutions for real-world problems in Pakistan.
+Register: goo.gle/aiseekho2026-hackathon
 
-Dear Students,
+Recommended next steps:
+- Register for The National AI Hackathon '26 immediately to secure a spot while registration remains open.
+- Prepare and submit your Google Antigravity application before May 11.
 
-Jazz (Veon Pakistan) is proud to announce the Jazz STEM Scholarship 2026 for outstanding STEM students across Pakistan.
+Report generated by 117 agents, saving you ~40 minutes of web browsing time.`,
 
-Award:
-- PKR 50,000 one-time scholarship
-- Paid internship at Jazz HQ, Islamabad (2 months)
-- Mentorship from Jazz engineers
+  `From: Outskill <hi@outskill.com>
+Date: Tue, Apr 7, 2026 at 8:01 PM
+Subject: Your Generative AI Mastermind Resources, Recordings & Certificate Are Now Live
+To: subhan404x@gmail.com
 
-Eligibility:
-- Pakistani national enrolled in BS CS, SE, EE, or related STEM program
-- Semester 3–6
-- Minimum CGPA: 3.2
-- Financial need preferred
+Hi Learner,
 
-Required Documents:
-- Academic transcripts
-- CNIC copy
-- Personal statement (300 words)
-- Two reference letters from faculty
+We hope you enjoyed and gained valuable insights from the Generative AI Mastermind.
 
-Deadline: 20 April 2026
-Apply: https://jazz.com.pk/stem-scholarship-2026
-Contact: scholarships@jazz.com.pk`,
+To help you continue your learning journey, here are the promised resources:
+
+Access Recordings & Resources: Click Here for Recordings & Resources
+Download Your Certificate: Click here to download
+
+Share the Mastermind with Your Peers
+Here's your unique referral link: http://referral-global.outskill.com/
+(We frequently reward our top referrers — you may receive something special!)
+
+Want daily AI Updates?
+Follow top AI practitioners and stay ahead with their daily insights and content.
+
+Facing Access Issues?
+If you're unable to access the recordings, kindly reach out to hi@outskill.com
+
+The journey to mastering AI continues. We're here to support you every step of the way.
+
+Wishing you continued success,
+Team Outskill`,
 ];
 
 export const SAMPLE_EMAILS = SAMPLE_EMAILS_ARRAY.join("\n\n---\n\n");
 
 export const DEFAULT_PROFILE = {
-  name: "Your Name",
+  name: "Muhammad Subhan",
   degree: "BS Computer Science",
   semester: 6,
   cgpa: 3.2,
   skills: ["Python", "React", "Machine Learning", "Node.js"],
-  preferredTypes: ["internship", "fellowship", "scholarship"] as OpportunityType[],
+  preferredTypes: ["internship", "fellowship", "scholarship", "competition"] as OpportunityType[],
   financialNeed: true,
   location: "Lahore",
   experience: "1 year freelancing web development, GDG member",
