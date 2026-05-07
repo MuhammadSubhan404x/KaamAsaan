@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { ChevronRight, Clock, ExternalLink, CheckSquare, AlertTriangle, FileText, CalendarPlus, ChevronDown } from "lucide-react";
+import { ChevronDown, Clock, ExternalLink, CheckSquare, AlertTriangle, FileText, CalendarPlus } from "lucide-react";
 import type { RankedOpportunity } from "@/lib/types";
-import ScoreRing from "./ScoreRing";
 
 interface OpportunityCardProps {
   item: RankedOpportunity;
@@ -13,26 +12,18 @@ interface OpportunityCardProps {
   index?: number;
 }
 
-const TYPE_COLORS: Record<string, { bg: string; color: string; border: string }> = {
-  scholarship: { bg: "rgba(66,167,114,0.1)",   color: "#42A772", border: "rgba(66,167,114,0.2)"  },
-  internship:  { bg: "rgba(94,106,210,0.1)",   color: "#7A85FF", border: "rgba(94,106,210,0.2)"  },
-  fellowship:  { bg: "rgba(122,133,255,0.1)",  color: "#9DA8FF", border: "rgba(122,133,255,0.2)" },
-  competition: { bg: "rgba(242,161,68,0.1)",   color: "#F2A144", border: "rgba(242,161,68,0.2)"  },
-  research:    { bg: "rgba(100,160,220,0.1)",  color: "#64A0DC", border: "rgba(100,160,220,0.2)" },
-  default:     { bg: "rgba(138,143,152,0.1)",  color: "#8A8F98", border: "rgba(138,143,152,0.2)" },
+const TYPE_COLORS: Record<string, { color: string; bg: string; border: string }> = {
+  scholarship: { color: "#22c55e",  bg: "rgba(34,197,94,0.08)",   border: "rgba(34,197,94,0.15)"  },
+  internship:  { color: "#a1a1aa",  bg: "rgba(161,161,170,0.08)", border: "rgba(161,161,170,0.15)" },
+  fellowship:  { color: "#e4e4e7",  bg: "rgba(228,228,231,0.08)", border: "rgba(228,228,231,0.15)" },
+  competition: { color: "#f59e0b",  bg: "rgba(245,158,11,0.08)",  border: "rgba(245,158,11,0.15)"  },
+  research:    { color: "#60a5fa",  bg: "rgba(96,165,250,0.08)",  border: "rgba(96,165,250,0.15)"  },
+  default:     { color: "#71717a",  bg: "rgba(113,113,122,0.08)", border: "rgba(113,113,122,0.15)" },
 };
-
-const RANK_COLORS = [
-  "linear-gradient(135deg, #F2A144, #E8904A)",
-  "linear-gradient(135deg, #8A8F98, #6E737C)",
-  "linear-gradient(135deg, #CD7F32, #B56A22)",
-];
 
 function buildCalendarUrl(opp: import("@/lib/types").ExtractedOpportunity): string {
   const title = encodeURIComponent(`Apply: ${opp.title}`);
-  const org = encodeURIComponent(opp.organization);
-  const link = opp.applicationLink ? `\nApply: ${opp.applicationLink}` : "";
-  const details = encodeURIComponent(`Opportunity: ${opp.title}\nOrganization: ${opp.organization}${link}\n\nRanked by KaamAsaan`);
+  const details = encodeURIComponent(`${opp.title} — ${opp.organization}${opp.applicationLink ? `\nApply: ${opp.applicationLink}` : ""}`);
   let dates = "";
   if (opp.deadline) {
     const d = opp.deadline.replace(/-/g, "");
@@ -40,7 +31,7 @@ function buildCalendarUrl(opp: import("@/lib/types").ExtractedOpportunity): stri
     end.setDate(end.getDate() + 1);
     dates = `${d}/${end.toISOString().slice(0, 10).replace(/-/g, "")}`;
   }
-  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${org}`;
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${encodeURIComponent(opp.organization)}`;
 }
 
 export default function OpportunityCard({ item, style, onCoverLetter, index = 0 }: OpportunityCardProps) {
@@ -49,53 +40,51 @@ export default function OpportunityCard({ item, style, onCoverLetter, index = 0 
 
   const typeStyle = TYPE_COLORS[opp.type] ?? TYPE_COLORS.default;
   const isUrgent = daysUntilDeadline !== null && daysUntilDeadline <= 3;
-  const isThisWeek = daysUntilDeadline !== null && daysUntilDeadline > 3 && daysUntilDeadline <= 7;
-
-  const urgencyColor = isUrgent ? "var(--score-low)" : isThisWeek ? "var(--score-mid)" : "var(--text-tertiary)";
-
-  const scoreColor = score.total >= 80 ? "var(--score-high)" : score.total >= 50 ? "var(--score-mid)" : "var(--score-low)";
-  const scoreClass = score.total >= 80 ? "score-high" : score.total >= 50 ? "score-mid" : "score-low";
+  const scoreClass = score.total >= 70 ? "score-high" : score.total >= 45 ? "score-mid" : "score-low";
 
   return (
     <div
       className="animate-row-in"
       style={{
         ...style,
-        animationDelay: `${index * 55}ms`,
+        animationDelay: `${index * 40}ms`,
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}
     >
-      {/* Main row */}
+      {/* Row */}
       <button
         onClick={() => setExpanded(e => !e)}
         style={{
           width: "100%",
           display: "flex",
           alignItems: "center",
-          gap: "12px",
-          padding: "11px 16px",
+          gap: 12,
+          padding: "10px 16px",
           background: "transparent",
           border: "none",
           cursor: "pointer",
           textAlign: "left",
-          transition: "background 150ms ease",
+          transition: "background 100ms ease",
         }}
-        onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.03)")}
+        onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.025)")}
         onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
       >
         {/* Rank */}
-        <div style={{ width: 24, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: 28, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
           {rank <= 3 ? (
             <div style={{
-              width: 20, height: 20, borderRadius: "4px",
-              background: RANK_COLORS[rank - 1] ?? "rgba(138,143,152,0.15)",
+              width: 22, height: 22, borderRadius: 4,
+              background: rank === 1 ? "#fafafa" : rank === 2 ? "#27272a" : "#1c1c1f",
+              border: rank === 1 ? "none" : "1px solid rgba(255,255,255,0.1)",
               display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: "0.625rem", fontWeight: 700, color: "#fff",
+              fontSize: "0.6875rem", fontWeight: 800,
+              color: rank === 1 ? "#09090b" : "#a1a1aa",
+              letterSpacing: "-0.02em",
             }}>
               {rank}
             </div>
           ) : (
-            <span style={{ fontSize: "0.75rem", color: "var(--text-tertiary)", fontWeight: 500, fontVariantNumeric: "tabular-nums" }}>
+            <span style={{ fontSize: "0.75rem", color: "#3f3f46", fontWeight: 500, fontVariantNumeric: "tabular-nums" }}>
               {rank}
             </span>
           )}
@@ -103,124 +92,111 @@ export default function OpportunityCard({ item, style, onCoverLetter, index = 0 
 
         {/* Title + org */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "2px", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 2 }}>
             <span style={{
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              color: "var(--text-primary)",
-              letterSpacing: "-0.01em",
-              lineHeight: 1.3,
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              maxWidth: "380px",
+              fontSize: "0.875rem", fontWeight: 500, color: "#fafafa",
+              letterSpacing: "-0.01em", lineHeight: 1.3,
+              overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 400,
             }}>
               {opp.title}
             </span>
             {isUrgent && (
               <span style={{
-                fontSize: "0.625rem", fontWeight: 600, letterSpacing: "0.06em",
-                padding: "1px 6px", borderRadius: "99px",
-                background: "rgba(227,88,88,0.15)", color: "var(--score-low)",
-                border: "1px solid rgba(227,88,88,0.25)", textTransform: "uppercase",
+                fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.06em",
+                padding: "1px 5px", borderRadius: 99, textTransform: "uppercase",
+                background: "rgba(239,68,68,0.1)", color: "#ef4444",
+                border: "1px solid rgba(239,68,68,0.2)",
               }}>
                 urgent
               </span>
             )}
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>{opp.organization}</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ fontSize: "0.75rem", color: "#71717a" }}>{opp.organization}</span>
             {daysUntilDeadline !== null && (
-              <span style={{ display: "flex", alignItems: "center", gap: "3px", fontSize: "0.6875rem", color: urgencyColor }}>
+              <span style={{
+                display: "flex", alignItems: "center", gap: 3,
+                fontSize: "0.6875rem",
+                color: isUrgent ? "#ef4444" : daysUntilDeadline <= 7 ? "#f59e0b" : "#52525b",
+              }}>
                 <Clock size={10} />
-                {daysUntilDeadline <= 0 ? "Passed" : `${daysUntilDeadline}d left`}
+                {daysUntilDeadline <= 0 ? "Passed" : `${daysUntilDeadline}d`}
               </span>
             )}
           </div>
         </div>
 
-        {/* Right side */}
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
+        {/* Right */}
+        <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
           <span
             className="type-pill"
-            style={{
-              background: typeStyle.bg,
-              color: typeStyle.color,
-              borderColor: typeStyle.border,
-            }}
+            style={{ background: typeStyle.bg, color: typeStyle.color, borderColor: typeStyle.border }}
           >
             {opp.type}
           </span>
-
-          <span className={`score-badge ${scoreClass}`} style={{ minWidth: 36 }}>
+          <span className={`score-badge ${scoreClass}`} style={{ minWidth: 34 }}>
             {score.total}
           </span>
-
           <ChevronDown
-            size={13}
+            size={12}
             style={{
-              color: "var(--text-tertiary)",
-              transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+              color: "#52525b",
+              transform: expanded ? "rotate(180deg)" : "none",
               transition: "transform 150ms ease",
+              flexShrink: 0,
             }}
           />
         </div>
       </button>
 
-      {/* Expanded detail */}
+      {/* Expanded */}
       {expanded && (
         <div
-          className="animate-slide-down"
+          className="animate-fade-in"
           style={{
-            padding: "0 16px 16px 52px",
+            padding: "12px 16px 16px 56px",
             borderTop: "1px solid rgba(255,255,255,0.04)",
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
           }}
         >
           {/* Score breakdown */}
-          <div style={{ display: "flex", gap: "6px", marginBottom: "14px", marginTop: "14px", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
             {[
-              { label: "Fit", value: score.fit, color: "#7A85FF" },
-              { label: "Urgency", value: score.urgency, color: "var(--score-low)" },
-              { label: "Completeness", value: score.completeness, color: "#64A0DC" },
-              { label: "Prestige", value: score.prestige, color: "var(--score-mid)" },
-            ].map(({ label, value, color }) => (
+              { label: "Fit",          value: score.fit },
+              { label: "Urgency",      value: score.urgency },
+              { label: "Completeness", value: score.completeness },
+              { label: "Prestige",     value: score.prestige },
+            ].map(({ label, value }) => (
               <div key={label} style={{
-                display: "flex", alignItems: "center", gap: "6px",
+                display: "flex", alignItems: "center", gap: 6,
                 padding: "4px 10px",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.06)",
-                borderRadius: "6px",
-                fontSize: "0.75rem",
+                background: "#18181b", border: "1px solid rgba(255,255,255,0.06)",
+                borderRadius: 6, fontSize: "0.75rem",
               }}>
-                <span style={{ color: "var(--text-tertiary)" }}>{label}</span>
-                <span style={{ color, fontWeight: 600, fontVariantNumeric: "tabular-nums" }}>{value}</span>
+                <span style={{ color: "#52525b" }}>{label}</span>
+                <span style={{ color: "#a1a1aa", fontWeight: 600, fontVariantNumeric: "tabular-nums" }}>{value}</span>
               </div>
             ))}
           </div>
 
           {/* Summary */}
           {opp.summary && (
-            <p style={{ fontSize: "0.8125rem", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "12px" }}>
-              {opp.summary}
-            </p>
+            <p style={{ fontSize: "0.8125rem", color: "#71717a", lineHeight: 1.6 }}>{opp.summary}</p>
           )}
 
           {/* Evidence */}
           {score.evidence.length > 0 && (
-            <div style={{ marginBottom: "12px" }}>
-              <div className="label" style={{ marginBottom: "6px" }}>Evidence</div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
+            <div>
+              <div className="label" style={{ marginBottom: 6 }}>Evidence</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
                 {score.evidence.slice(0, 6).map((ev, i) => (
                   <span key={i} style={{
-                    fontSize: "0.6875rem",
-                    padding: "2px 8px",
-                    borderRadius: "4px",
-                    background: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(255,255,255,0.06)",
-                    color: "var(--text-secondary)",
-                  }}>
-                    {ev}
-                  </span>
+                    fontSize: "0.6875rem", padding: "2px 8px", borderRadius: 4,
+                    background: "#18181b", border: "1px solid rgba(255,255,255,0.06)",
+                    color: "#71717a",
+                  }}>{ev}</span>
                 ))}
               </div>
             </div>
@@ -228,12 +204,12 @@ export default function OpportunityCard({ item, style, onCoverLetter, index = 0 
 
           {/* Checklist */}
           {actionChecklist.length > 0 && (
-            <div style={{ marginBottom: "14px" }}>
-              <div className="label" style={{ marginBottom: "6px" }}>Action Checklist</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+            <div>
+              <div className="label" style={{ marginBottom: 6 }}>Action Checklist</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                 {actionChecklist.slice(0, 5).map((step, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "0.8125rem", color: "var(--text-secondary)" }}>
-                    <CheckSquare size={12} style={{ color: "var(--score-high)", flexShrink: 0, marginTop: 2 }} />
+                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: "0.8125rem", color: "#71717a" }}>
+                    <CheckSquare size={12} style={{ color: "#22c55e", flexShrink: 0, marginTop: 2 }} />
                     <span>{step}</span>
                   </div>
                 ))}
@@ -241,35 +217,25 @@ export default function OpportunityCard({ item, style, onCoverLetter, index = 0 
             </div>
           )}
 
-          {/* Action buttons */}
-          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+          {/* Actions */}
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
             {opp.applicationLink && (
-              <a
-                href={opp.applicationLink}
-                target="_blank"
-                rel="noopener noreferrer"
+              <a href={opp.applicationLink} target="_blank" rel="noopener noreferrer"
                 className="btn-primary"
-                style={{ textDecoration: "none", fontSize: "0.75rem", padding: "5px 12px" }}
-              >
+                style={{ textDecoration: "none", fontSize: "0.8125rem", padding: "6px 14px", gap: 5 }}>
                 Apply Now <ExternalLink size={11} />
               </a>
             )}
-            <a
-              href={buildCalendarUrl(opp)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => { e.stopPropagation(); toast.success("Opening Google Calendar", { description: opp.title }); }}
+            <a href={buildCalendarUrl(opp)} target="_blank" rel="noopener noreferrer"
+              onClick={(e) => { e.stopPropagation(); toast.success("Opening Google Calendar"); }}
               className="btn-secondary"
-              style={{ textDecoration: "none", fontSize: "0.75rem", padding: "5px 12px" }}
-            >
+              style={{ textDecoration: "none", fontSize: "0.8125rem", padding: "6px 14px", gap: 5 }}>
               <CalendarPlus size={11} /> Calendar
             </a>
             {onCoverLetter && (
-              <button
-                onClick={(e) => { e.stopPropagation(); onCoverLetter(); }}
+              <button onClick={(e) => { e.stopPropagation(); onCoverLetter(); }}
                 className="btn-secondary"
-                style={{ fontSize: "0.75rem", padding: "5px 12px" }}
-              >
+                style={{ fontSize: "0.8125rem", padding: "6px 14px", gap: 5 }}>
                 <FileText size={11} /> Cover Letter
               </button>
             )}
