@@ -1,0 +1,27 @@
+{
+  "spamCount": 1,
+  "processedAt": "2026-05-03T14:00:00.000Z",
+  "results": [
+    {
+      "rank": 1,
+      "daysUntilDeadline": 7,
+      "score": { "fit": 75, "urgency": 80, "completeness": 85, "prestige": 50, "total": 76, "evidence": ["Matches your preferred type: fellowship","1 skill match(es): Python","No CGPA requirement","Location compatible","Funded opportunity matches your financial need","7 days left — act this week","Missing: required docs","Standard organization prestige"] },
+      "actionChecklist": ["Open application: https://fellowship.mlh.io","Mark deadline: 2026-05-10","Tailor your CV/SOP for this opportunity","Prepare a strong GitHub portfolio — MLH values open-source contributions","Join MLH Discord to connect with past fellows before applying"],
+      "opportunity": { "emailIndex": 4, "isOpportunity": true, "title": "MLH Fellowship Spring/Summer 2026", "type": "fellowship", "organization": "Major League Hacking (MLH)", "deadline": "2026-05-10", "deadlineRaw": "10 May 2026", "eligibility": "Currently enrolled student OR recent graduate (within 1 year). No CGPA minimum. Strong GitHub portfolio preferred.", "minCGPA": null, "requiredDocs": [], "skills": ["Python","Open Source","GitHub"], "applicationLink": "https://fellowship.mlh.io", "contactEmail": "fellowship@mlh.io", "fundingMentioned": true, "location": "Remote", "degreeRequirement": null, "isStrictDegree": false, "summary": "12-week fully remote fellowship with $5,000 stipend. Tracks include Open Source, Explorer, and Production Engineering. Open to Pakistani students.", "rawSnippet": "MLH Fellowship applications for Spring/Summer 2026 batch are open!" }
+    },
+    {
+      "rank": 2,
+      "daysUntilDeadline": 43,
+      "score": { "fit": 85, "urgency": 20, "completeness": 100, "prestige": 70, "total": 66, "evidence": ["Matches your preferred type: internship","3 skill match(es): Python, React, Node.js","CGPA 3.2 meets minimum 3.0","Location compatible","Funded opportunity matches your financial need","43 days left — 2 months","All key fields extracted","Well-known organization: Tintash"] },
+      "actionChecklist": ["Contact: careers@tintash.com","Mark deadline: 2026-06-15","Send CV and GitHub profile with subject: SWE Intern Summer 2026 – [Your Name]","Tailor your CV/SOP for this opportunity"],
+      "opportunity": { "emailIndex": 2, "isOpportunity": true, "title": "Paid Software Engineer Intern – Tintash Summer 2026", "type": "internship", "organization": "Tintash", "deadline": "2026-06-15", "deadlineRaw": "15 June 2026", "eligibility": "CS / SE / IT undergraduate (Semester 4 or above). Minimum CGPA 3.0.", "minCGPA": 3.0, "requiredDocs": ["CV","GitHub profile"], "skills": ["Python","React","Node.js"], "applicationLink": null, "contactEmail": "careers@tintash.com", "fundingMentioned": true, "location": "Lahore", "degreeRequirement": "CS / SE / IT", "isStrictDegree": false, "summary": "Paid 3-month on-site internship at Tintash, Lahore (DHA Phase 6). Stipend PKR 45,000/month.", "rawSnippet": "Tintash is hiring Software Engineer Interns for Summer 2026." }
+    },
+    {
+      "rank": 3,
+      "daysUntilDeadline": 22,
+      "score": { "fit": 70, "urgency": 40, "completeness": 100, "prestige": 70, "total": 66, "evidence": ["Matches your preferred type: scholarship","CGPA 3.2 meets minimum 2.5","Location compatible","Funded opportunity matches your financial need","22 days left — this month","All key fields extracted","Well-known organization: HEC"] },
+      "actionChecklist": ["Open application: https://scholarships.hec.gov.pk/need-based-2026","Mark deadline: 2026-05-25","Contact: scholarships@hec.gov.pk","Prepare CNIC copy","Obtain income certificate from NADRA / Union Council","Gather latest academic transcripts","Prepare bank statement (last 6 months)","Download undertaking form from HEC portal"],
+      "opportunity": { "emailIndex": 0, "isOpportunity": true, "title": "HEC Need-Based Scholarship 2026", "type": "scholarship", "organization": "Higher Education Commission (HEC)", "deadline": "2026-05-25", "deadlineRaw": "25 May 2026", "eligibility": "Pakistani national enrolled in BS/BE. Minimum CGPA 2.5. Annual family income below PKR 600,000. Semester 2–8.", "minCGPA": 2.5, "requiredDocs": ["CNIC copy","Income certificate from NADRA / Union Council","Latest academic transcripts","Bank statement (last 6 months)","Undertaking form (from HEC portal)"], "skills": [], "applicationLink": "https://scholarships.hec.gov.pk/need-based-2026", "contactEmail": "scholarships@hec.gov.pk", "fundingMentioned": true, "location": "Pakistan", "degreeRequirement": "BS/BE", "isStrictDegree": false, "summary": "PKR 10,000/month stipend plus full tuition waiver for financially deserving Pakistani undergraduates.", "rawSnippet": "The Higher Education Commission of Pakistan is pleased to announce the HEC Need-Based Scholarship Program 2026." }
+    }
+  ]
+}
