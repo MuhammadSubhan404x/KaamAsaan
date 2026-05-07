@@ -77,7 +77,7 @@ export default function ProfileForm({ profile, onChange }: ProfileFormProps) {
         onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <User size={13} style={{ color: "var(--color-brand-bg)" }} />
+          <User size={13} style={{ color: "var(--color-text-secondary)" }} />
           <span style={{ fontSize: "0.875rem", fontWeight: 590, color: "var(--color-text-primary)", letterSpacing: "-0.015em" }}>
             Your Profile
           </span>
@@ -140,9 +140,9 @@ export default function ProfileForm({ profile, onChange }: ProfileFormProps) {
                   <span key={i} style={{
                     fontSize: "0.6875rem", padding: "2px 8px",
                     borderRadius: "var(--radius-rounded)",
-                    background: "rgba(94,106,210,0.1)",
-                    border: "1px solid rgba(94,106,210,0.2)",
-                    color: "var(--color-link-primary)",
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid var(--color-border-primary)",
+                    color: "var(--color-text-tertiary)",
                   }}>{s}</span>
                 ))}
               </div>
@@ -180,9 +180,9 @@ export default function ProfileForm({ profile, onChange }: ProfileFormProps) {
                     border: "1px solid",
                     transition: "all 100ms ease",
                     textTransform: "capitalize",
-                    background: on ? "var(--color-brand-bg)" : "transparent",
-                    color: on ? "#fff" : "var(--color-text-tertiary)",
-                    borderColor: on ? "var(--color-brand-bg)" : "var(--color-border-primary)",
+                    background: on ? "#ffffff" : "transparent",
+                    color: on ? "#000000" : "var(--color-text-tertiary)",
+                    borderColor: on ? "#ffffff" : "var(--color-border-primary)",
                   }}>
                     {t}
                   </button>
@@ -206,8 +206,8 @@ export default function ProfileForm({ profile, onChange }: ProfileFormProps) {
             <button onClick={() => set("financialNeed", !profile.financialNeed)} style={{
               position: "relative", width: 34, height: 18,
               borderRadius: "var(--radius-rounded)",
-              background: profile.financialNeed ? "var(--color-brand-bg)" : "var(--color-bg-level-3)",
-              border: `1px solid ${profile.financialNeed ? "var(--color-brand-bg)" : "var(--color-border-secondary)"}`,
+              background: profile.financialNeed ? "#ffffff" : "transparent",
+              border: `1px solid ${profile.financialNeed ? "#ffffff" : "var(--color-border-primary)"}`,
               cursor: "pointer", transition: "background 150ms ease, border-color 150ms ease",
               flexShrink: 0,
             }}>
@@ -216,7 +216,7 @@ export default function ProfileForm({ profile, onChange }: ProfileFormProps) {
                 left: profile.financialNeed ? 16 : 2,
                 width: 12, height: 12,
                 borderRadius: "50%",
-                background: profile.financialNeed ? "#fff" : "var(--color-text-quaternary)",
+                background: profile.financialNeed ? "#000000" : "var(--color-text-quaternary)",
                 transition: "left 150ms ease",
               }} />
             </button>

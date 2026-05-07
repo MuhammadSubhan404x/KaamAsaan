@@ -50,13 +50,13 @@ export default function ResultsPanel({ data, profile }: ResultsPanelProps) {
         <div style={{
           display: "flex", alignItems: "center", gap: 8,
           padding: "8px 12px",
-          background: "rgba(248,113,113,0.07)",
-          border: "1px solid rgba(248,113,113,0.18)",
+          background: "rgba(255,255,255,0.04)",
+          border: "1px solid var(--color-border-primary)",
           borderRadius: "var(--radius-6)",
           fontSize: "0.8125rem",
         }}>
-          <AlertTriangle size={13} style={{ color: "var(--score-low)", flexShrink: 0 }} />
-          <span style={{ color: "var(--score-low)", fontWeight: 510 }}>
+          <AlertTriangle size={13} style={{ color: "var(--color-text-primary)", flexShrink: 0 }} />
+          <span style={{ color: "var(--color-text-primary)", fontWeight: 510 }}>
             {critical.length} deadline{critical.length > 1 ? "s" : ""} in 3 days
           </span>
           <span style={{ color: "var(--color-text-tertiary)" }}>
@@ -68,13 +68,13 @@ export default function ResultsPanel({ data, profile }: ResultsPanelProps) {
         <div style={{
           display: "flex", alignItems: "center", gap: 8,
           padding: "8px 12px",
-          background: "rgba(245,158,11,0.07)",
-          border: "1px solid rgba(245,158,11,0.15)",
+          background: "rgba(255,255,255,0.04)",
+          border: "1px solid var(--color-border-primary)",
           borderRadius: "var(--radius-6)",
           fontSize: "0.8125rem",
         }}>
-          <Clock size={13} style={{ color: "var(--score-mid)", flexShrink: 0 }} />
-          <span style={{ color: "var(--score-mid)", fontWeight: 510 }}>
+          <Clock size={13} style={{ color: "var(--color-text-primary)", flexShrink: 0 }} />
+          <span style={{ color: "var(--color-text-primary)", fontWeight: 510 }}>
             {thisWeek.length} deadline{thisWeek.length > 1 ? "s" : ""} this week
           </span>
           <span style={{ color: "var(--color-text-tertiary)" }}>
@@ -99,7 +99,7 @@ export default function ResultsPanel({ data, profile }: ResultsPanelProps) {
           flexWrap: "wrap", gap: 8,
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <Trophy size={13} style={{ color: "var(--score-mid)" }} />
+            <Trophy size={13} style={{ color: "var(--color-text-secondary)" }} />
             <span style={{
               fontSize: "0.875rem",
               fontWeight: 590,

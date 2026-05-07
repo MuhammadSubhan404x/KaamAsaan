@@ -2,127 +2,185 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ═══════════════════════════════════════════════════════════
-   LINEAR.APP EXACT DESIGN SYSTEM — Extracted from source CSS
-   ═══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   LINEAR.APP STRUCTURE — PURE BLACK & WHITE ONLY
+   Exact tokens from Linear source CSS.
+   Colors: #000000 (black) and #ffffff (white) ONLY.
+   ══════════════════════════════════════════════════════════ */
 
-/* ── Linear's actual font ────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* Linear's actual Inter Variable font */
+@font-face {
+  font-family: "Inter Variable";
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  src: url(https://static.linear.app/fonts/InterVariable.woff2?v=4.1) format("woff2");
+}
 
+/* ── Linear's exact :root tokens — colors forced to B&W ─── */
 :root {
-  /* ── Header ─────────────────────────────────────────────── */
-  --header-height: 52px;
-  --header-bg: rgba(11,11,11,0.85);
-  --header-border: rgba(255,255,255,0.08);
-
-  /* ── Layout ─────────────────────────────────────────────── */
+  /* Layout — copied exactly from Linear */
+  --header-height:      52px;
+  --header-blur:        20px;
   --page-padding-inline: 24px;
-  --page-max-width: 1024px;
-  --radius-4:  4px;
-  --radius-6:  6px;
-  --radius-8:  8px;
-  --radius-12: 12px;
-  --radius-16: 16px;
+  --page-padding-block:  64px;
+  --page-padding-left:  max(env(safe-area-inset-left), var(--page-padding-inline));
+  --page-padding-right: max(env(safe-area-inset-right), var(--page-padding-inline));
+  --page-max-width:     1024px;
+  --prose-max-width:     624px;
+
+  /* Radius — Linear exact values */
+  --radius-4:       4px;
+  --radius-6:       6px;
+  --radius-8:       8px;
+  --radius-12:      12px;
+  --radius-16:      16px;
   --radius-rounded: 9999px;
+  --border-hairline: 1px;
 
-  /* ── EXACT Linear dark theme colors ─────────────────────── */
-  /* Backgrounds — layered elevation system */
-  --color-bg-primary:    #08090a;
-  --color-bg-secondary:  #1c1c1f;
-  --color-bg-tertiary:   #232326;
-  --color-bg-quaternary: #28282c;
-  --color-bg-panel:      #0f1011;
+  /* Z-layers — Linear exact */
+  --layer-header:  100;
+  --layer-popover: 600;
+  --layer-dialog:  700;
+  --layer-toasts:  800;
 
-  /* Level system */
-  --color-bg-level-0: #08090a;
-  --color-bg-level-1: #0f1011;
-  --color-bg-level-2: #141516;
-  --color-bg-level-3: #191a1b;
-  --color-bg-tint:    #141516;
+  /* Font stack — Linear exact */
+  --font-regular:       "Inter Variable", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-monospace:     ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-settings:      "cv01", "ss03";
+  --font-variations:    "opsz" auto;
 
-  /* Translucent surfaces */
-  --color-bg-translucent: rgba(255,255,255,0.05);
-
-  /* Borders */
-  --color-border-primary:              #23252a;
-  --color-border-secondary:            #34343a;
-  --color-border-tertiary:             #3e3e44;
-  --color-border-translucent:          rgba(255,255,255,0.05);
-  --color-border-translucent-strong:   rgba(255,255,255,0.08);
-
-  /* Lines / dividers */
-  --color-line-primary:   #37393a;
-  --color-line-secondary: #202122;
-  --color-line-tertiary:  #18191a;
-
-  /* Text */
-  --color-text-primary:    #f7f8f8;
-  --color-text-secondary:  #d0d6e0;
-  --color-text-tertiary:   #8a8f98;
-  --color-text-quaternary: #62666d;
-
-  /* Brand */
-  --color-brand-bg:   #5e6ad2;
-  --color-brand-text: #fff;
-  --color-link-primary: #828fff;
-  --color-link-hover:   #fff;
-
-  /* Buttons */
-  --color-button-invert-bg:       #e5e5e6;
-  --color-button-invert-bg-hover: #ffffff;
-
-  /* Shadows */
-  --shadow-low:    0px 2px 4px rgba(0,0,0,0.1);
-  --shadow-medium: 0px 4px 24px rgba(0,0,0,0.2);
-  --shadow-high:   0px 7px 32px rgba(0,0,0,0.35);
-
-  /* Typography — Linear's exact font stack */
-  --font-regular: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
-                  "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", sans-serif;
-  --font-monospace: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-
-  /* Font weights — Linear uses unusual values: 510, 590, 680 */
+  /* Font weights — Linear exact unusual values */
+  --font-weight-light:    300;
   --font-weight-normal:   400;
   --font-weight-medium:   510;
   --font-weight-semibold: 590;
   --font-weight-bold:     680;
 
-  /* Score colours — preserving semantic meaning */
-  --score-high: #4ade80;
-  --score-mid:  #f59e0b;
-  --score-low:  #f87171;
+  /* Editor tokens — Linear exact */
+  --editor-line-height:    1.6;
+  --editor-letter-spacing: -0.00666667em;
+  --editor-block-radius:   6px;
+
+  /* Focus ring — Linear exact */
+  --focus-ring-width:   1px;
+  --focus-ring-color:   rgba(255,255,255,0.6);
+  --focus-ring-outline: var(--focus-ring-width) solid var(--focus-ring-color);
+
+  /* ── ALL COLORS → PURE BLACK & WHITE ────────────────────
+     Background levels: black shades (very subtle)
+     Text: white
+     Borders: white with opacity
+     No purple. No green. No amber. No red. ZERO color.
+     ─────────────────────────────────────────────────────── */
+
+  /* Header */
+  --header-bg:     rgba(0,0,0,0.88);
+  --header-border: rgba(255,255,255,0.08);
+
+  /* Backgrounds — subtle black elevation system */
+  --color-bg-primary:    #000000;
+  --color-bg-secondary:  #0d0d0d;
+  --color-bg-tertiary:   #111111;
+  --color-bg-quaternary: #151515;
+  --color-bg-panel:      #080808;
+  --color-bg-translucent: rgba(255,255,255,0.04);
+
+  /* Background levels */
+  --color-bg-level-0: #000000;
+  --color-bg-level-1: #080808;
+  --color-bg-level-2: #0f0f0f;
+  --color-bg-level-3: #141414;
+  --color-bg-tint:    #0f0f0f;
+
+  /* Borders — white with opacity */
+  --color-border-primary:            rgba(255,255,255,0.1);
+  --color-border-secondary:          rgba(255,255,255,0.16);
+  --color-border-tertiary:           rgba(255,255,255,0.22);
+  --color-border-translucent:        rgba(255,255,255,0.05);
+  --color-border-translucent-strong: rgba(255,255,255,0.08);
+
+  /* Lines / dividers */
+  --color-line-primary:   rgba(255,255,255,0.08);
+  --color-line-secondary: rgba(255,255,255,0.06);
+  --color-line-tertiary:  rgba(255,255,255,0.04);
+
+  /* Text — white spectrum */
+  --color-text-primary:    #ffffff;
+  --color-text-secondary:  rgba(255,255,255,0.75);
+  --color-text-tertiary:   rgba(255,255,255,0.45);
+  --color-text-quaternary: rgba(255,255,255,0.25);
+
+  /* Links → white */
+  --color-link-primary: rgba(255,255,255,0.7);
+  --color-link-hover:   #ffffff;
+
+  /* Brand → white (replaces Linear's #5e6ad2) */
+  --color-brand-bg:   #ffffff;
+  --color-brand-text: #000000;
+
+  /* Buttons */
+  --color-button-invert-bg:       #ffffff;
+  --color-button-invert-bg-hover: rgba(255,255,255,0.88);
+
+  /* Selection */
+  --color-selection-bg:   rgba(255,255,255,0.2);
+  --color-selection-text: #000000;
+
+  /* Shadows — subtle */
+  --shadow-low:    0px 2px 4px rgba(0,0,0,0.4);
+  --shadow-medium: 0px 4px 24px rgba(0,0,0,0.6);
+  --shadow-high:   0px 7px 32px rgba(0,0,0,0.8);
+
+  /* Score "colors" → white only */
+  --score-high: rgba(255,255,255,0.9);
+  --score-mid:  rgba(255,255,255,0.9);
+  --score-low:  rgba(255,255,255,0.9);
 }
 
-/* ── Reset ───────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; }
-
+/* ── Linear exact body/html rules ───────────────────────── */
 html {
   font-size: 100%;
   font-weight: var(--font-weight-normal);
+  scroll-padding-top: calc(var(--header-height) + 36px);
+  scroll-padding-bottom: 32px;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  font-feature-settings: var(--font-settings);
+  font-variation-settings: var(--font-variations);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
-body {
-  background: var(--color-bg-primary);
-  color: var(--color-text-primary);
+body, button, html, input, optgroup, select, textarea {
   font-family: var(--font-regular);
-  font-size: 0.875rem;
-  line-height: 1.5;
-  min-height: 100vh;
 }
+
+body { line-height: 1.5; }
+
+*, *::after, *::before { box-sizing: border-box; }
+* { outline-color: transparent; }
 
 ::selection {
-  background: color-mix(in lch, var(--color-brand-bg), black 10%);
-  color: #fff;
+  color: var(--color-selection-text);
+  background: var(--color-selection-bg);
 }
 
 /* ── Scrollbar ───────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-border-secondary); border-radius: var(--radius-rounded); }
-::-webkit-scrollbar-thumb:hover { background: var(--color-border-tertiary); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: var(--radius-rounded); }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
 /* ── Keyframes ───────────────────────────────────────────── */
 @keyframes fadeUp {
@@ -134,7 +192,7 @@ body {
   to   { opacity: 1; }
 }
 @keyframes rowIn {
-  from { opacity: 0; transform: translateX(-5px); }
+  from { opacity: 0; transform: translateX(-4px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 @keyframes shimmer {
@@ -142,12 +200,7 @@ body {
   100% { background-position: 800px 0; }
 }
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-@keyframes gradientShift {
-  0%,100% { background-position: 0% 50%; }
-  50%     { background-position: 100% 50%; }
+  to { transform: rotate(360deg); }
 }
 
 /* ── Animation utilities ─────────────────────────────────── */
@@ -163,98 +216,94 @@ body {
 .animate-orb-1,.animate-orb-2,.animate-orb-3 { display: none !important; }
 
 .delay-0 { animation-delay: 0ms; }
-.delay-1 { animation-delay: 50ms; }
-.delay-2 { animation-delay: 100ms; }
-.delay-3 { animation-delay: 150ms; }
-.delay-4 { animation-delay: 200ms; }
-.delay-5 { animation-delay: 250ms; }
+.delay-1 { animation-delay: 45ms; }
+.delay-2 { animation-delay: 90ms; }
+.delay-3 { animation-delay: 135ms; }
+.delay-4 { animation-delay: 180ms; }
+.delay-5 { animation-delay: 225ms; }
 
 /* ── Shimmer ─────────────────────────────────────────────── */
 .shimmer {
-  background: linear-gradient(90deg,
-    var(--color-bg-level-2) 25%,
-    var(--color-bg-level-3) 50%,
-    var(--color-bg-level-2) 75%
-  );
+  background: linear-gradient(90deg, #0f0f0f 25%, #1a1a1a 50%, #0f0f0f 75%);
   background-size: 1600px 100%;
   animation: shimmer 1.8s infinite;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   BUTTON SYSTEM — Linear exact style
-   Primary: brand bg (#5e6ad2) → hover lighter
-   Invert: off-white bg (#e5e5e6), dark text → hover pure white
-   Outline: transparent bg, border, white text → hover muted
-   ═══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   BUTTON SYSTEM — B&W ONLY
+   Primary  = white bg, black text
+   Secondary = transparent, white border, white text
+   Ghost    = transparent, dim white text
+   ══════════════════════════════════════════════════════════ */
 
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: var(--color-brand-bg);
-  color: var(--color-brand-text);
-  font-size: 0.8125rem;
-  font-weight: var(--font-weight-medium);
-  letter-spacing: -0.006em;
-  padding: 7px 14px;
-  border-radius: var(--radius-6);
-  border: none;
-  cursor: pointer;
-  transition: opacity 120ms ease, transform 120ms ease, background 120ms ease;
-  white-space: nowrap;
-  text-decoration: none;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 1px 2px rgba(0,0,0,0.3);
-}
-.btn-primary:hover  { opacity: 0.88; }
-.btn-primary:active { transform: scale(0.98); }
-.btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
-
-/* Linear's "invert" button — the main CTA style */
-.btn-invert {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: var(--color-button-invert-bg);
-  color: #0a0a0a;
+  background: #ffffff;
+  color: #000000;
   font-size: 0.8125rem;
   font-weight: var(--font-weight-semibold);
+  font-family: var(--font-regular);
   letter-spacing: -0.01em;
-  padding: 8px 16px;
+  padding: 7px 14px;
   border-radius: var(--radius-6);
   border: none;
   cursor: pointer;
   transition: background 120ms ease, transform 120ms ease;
   white-space: nowrap;
   text-decoration: none;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 3px rgba(0,0,0,0.4);
 }
-.btn-invert:hover  { background: var(--color-button-invert-bg-hover); }
+.btn-primary:hover  { background: rgba(255,255,255,0.88); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+
+/* "Invert" = same as primary for B&W */
+.btn-invert {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-regular);
+  letter-spacing: -0.01em;
+  padding: 8px 18px;
+  border-radius: var(--radius-6);
+  border: none;
+  cursor: pointer;
+  transition: background 120ms ease, transform 120ms ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn-invert:hover  { background: rgba(255,255,255,0.88); }
 .btn-invert:active { transform: scale(0.98); }
-.btn-invert:disabled { opacity: 0.35; cursor: not-allowed; }
+.btn-invert:disabled { opacity: 0.3; cursor: not-allowed; }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: var(--color-bg-translucent);
+  background: transparent;
   color: var(--color-text-secondary);
   font-size: 0.8125rem;
   font-weight: var(--font-weight-medium);
+  font-family: var(--font-regular);
   letter-spacing: -0.006em;
   padding: 7px 14px;
   border-radius: var(--radius-6);
-  border: 1px solid var(--color-border-translucent-strong);
+  border: 1px solid var(--color-border-primary);
   cursor: pointer;
   transition: background 120ms ease, border-color 120ms ease, color 120ms ease, transform 120ms ease;
   white-space: nowrap;
   text-decoration: none;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
 }
 .btn-secondary:hover {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.05);
   border-color: var(--color-border-secondary);
   color: var(--color-text-primary);
 }
@@ -268,6 +317,7 @@ body {
   color: var(--color-text-tertiary);
   font-size: 0.8125rem;
   font-weight: var(--font-weight-normal);
+  font-family: var(--font-regular);
   padding: 5px 8px;
   border-radius: var(--radius-6);
   border: none;
@@ -279,10 +329,9 @@ body {
   color: var(--color-text-primary);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   INPUT SYSTEM — Linear dark inputs
-   ═══════════════════════════════════════════════════════════ */
-
+/* ══════════════════════════════════════════════════════════
+   INPUT — dark bg, white text (NOT white input bg)
+   ══════════════════════════════════════════════════════════ */
 .input-field {
   width: 100%;
   background: rgba(255,255,255,0.04);
@@ -301,15 +350,14 @@ body {
 .input-field::placeholder { color: var(--color-text-quaternary); }
 .input-field:hover { border-color: var(--color-border-secondary); }
 .input-field:focus {
-  border-color: var(--color-brand-bg);
-  background: rgba(94,106,210,0.04);
-  box-shadow: 0 0 0 2px rgba(94,106,210,0.18);
+  border-color: rgba(255,255,255,0.4);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   CARD / SURFACE SYSTEM
-   ═══════════════════════════════════════════════════════════ */
-
+/* ══════════════════════════════════════════════════════════
+   CARD / SURFACE — black bg, white border
+   ══════════════════════════════════════════════════════════ */
 .card {
   background: var(--color-bg-level-2);
   border: 1px solid var(--color-border-primary);
@@ -324,10 +372,9 @@ body {
   box-shadow: var(--shadow-medium);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   BADGE / PILL SYSTEM
-   ═══════════════════════════════════════════════════════════ */
-
+/* ══════════════════════════════════════════════════════════
+   BADGES — white border, white text
+   ══════════════════════════════════════════════════════════ */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -336,12 +383,13 @@ body {
   padding: 2px 7px;
   border-radius: var(--radius-rounded);
   border: 1px solid var(--color-border-primary);
-  background: var(--color-bg-tertiary);
+  background: rgba(255,255,255,0.04);
   color: var(--color-text-tertiary);
   letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
+/* Score badge — B&W only, no color */
 .score-badge {
   display: inline-flex;
   align-items: center;
@@ -350,13 +398,16 @@ body {
   font-weight: var(--font-weight-bold);
   padding: 2px 8px;
   border-radius: var(--radius-rounded);
+  border: 1px solid var(--color-border-secondary);
+  background: transparent;
+  color: var(--color-text-primary);
   font-variant-numeric: tabular-nums;
   min-width: 34px;
 }
-
-.score-high { background: rgba(74,222,128,0.1);  color: var(--score-high); border: 1px solid rgba(74,222,128,0.2); }
-.score-mid  { background: rgba(245,158,11,0.1); color: var(--score-mid);  border: 1px solid rgba(245,158,11,0.2); }
-.score-low  { background: rgba(248,113,113,0.1); color: var(--score-low);  border: 1px solid rgba(248,113,113,0.2); }
+/* All score classes → same B&W style */
+.score-high { background: transparent; color: var(--color-text-primary); border-color: var(--color-border-secondary); }
+.score-mid  { background: transparent; color: var(--color-text-primary); border-color: var(--color-border-secondary); }
+.score-low  { background: transparent; color: var(--color-text-primary); border-color: var(--color-border-secondary); }
 
 .type-pill {
   display: inline-flex;
@@ -367,14 +418,13 @@ body {
   border-radius: var(--radius-rounded);
   border: 1px solid var(--color-border-primary);
   color: var(--color-text-tertiary);
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.03);
   white-space: nowrap;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   LIST ROW — Linear's core interaction pattern
-   ═══════════════════════════════════════════════════════════ */
-
+/* ══════════════════════════════════════════════════════════
+   LIST ROW — Linear's core interaction pattern, B&W
+   ══════════════════════════════════════════════════════════ */
 .list-row {
   display: flex;
   align-items: center;
@@ -395,27 +445,21 @@ body {
   color: var(--color-text-quaternary);
 }
 
-/* ── Utilities ───────────────────────────────────────────── */
-.card-hover  { transition: border-color 120ms ease; }
+/* ── Misc utilities ──────────────────────────────────────── */
+.card-hover { transition: border-color 120ms ease; }
 .card-hover:hover { border-color: var(--color-border-secondary) !important; }
 
-.glass       { background: rgba(8,9,10,0.8); backdrop-filter: blur(20px); border: 1px solid var(--color-border-translucent-strong); }
-.glass-strong{ background: rgba(8,9,10,0.95); backdrop-filter: blur(24px); border: 1px solid var(--color-border-primary); }
+.glass        { background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border: 1px solid var(--color-border-translucent-strong); }
+.glass-strong { background: rgba(0,0,0,0.96); backdrop-filter: blur(24px); border: 1px solid var(--color-border-primary); }
 
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
   background-size: 26px 26px;
 }
 
-.gradient-text-animated {
-  background: linear-gradient(135deg, var(--color-text-primary), var(--color-brand-bg), #9aa3ff);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 6s ease infinite;
-}
+/* No gradient text — just white */
+.gradient-text-animated { color: #ffffff; background: none; -webkit-text-fill-color: #ffffff; }
 
 .btn-glow { transition: opacity 120ms ease, transform 120ms ease; }
-.btn-glow:hover { opacity: 0.88; }
+.btn-glow:hover { opacity: 0.85; }
 .glow-violet { box-shadow: none; }
