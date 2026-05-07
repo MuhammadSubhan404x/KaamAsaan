@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Mail, Clock, FileText, Sparkles, Shield, Zap } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 interface HeroProps {
   onGetStarted: () => void;
@@ -8,67 +8,131 @@ interface HeroProps {
 
 export default function Hero({ onGetStarted }: HeroProps) {
   return (
-    <section className="relative overflow-hidden px-6 py-28 text-center">
-      <div className="animate-orb-1 absolute top-[-120px] left-[-120px] w-[600px] h-[600px] rounded-full bg-violet-600/12 blur-[130px] pointer-events-none" />
-      <div className="animate-orb-2 absolute bottom-[-100px] right-[-100px] w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[110px] pointer-events-none" />
-      <div className="animate-orb-3 absolute top-[30%] left-[55%] w-[300px] h-[300px] rounded-full bg-purple-600/8 blur-[100px] pointer-events-none" />
-      <div className="dot-grid absolute inset-0 pointer-events-none opacity-40" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(124,58,237,0.12),transparent_65%)] pointer-events-none" />
+    <section
+      className="relative overflow-hidden"
+      style={{ padding: "80px 24px 72px", background: "var(--bg-app)" }}
+    >
+      {/* Subtle ambient orbs */}
+      <div
+        className="animate-orb-1 pointer-events-none"
+        style={{
+          position: "absolute", top: "-100px", left: "-100px",
+          width: "500px", height: "500px",
+          background: "radial-gradient(circle, rgba(94,106,210,0.1) 0%, transparent 65%)",
+          borderRadius: "50%",
+        }}
+      />
+      <div
+        className="animate-orb-2 pointer-events-none"
+        style={{
+          position: "absolute", bottom: "-80px", right: "-80px",
+          width: "400px", height: "400px",
+          background: "radial-gradient(circle, rgba(66,167,114,0.07) 0%, transparent 65%)",
+          borderRadius: "50%",
+        }}
+      />
 
-      <div className="relative max-w-4xl mx-auto">
-        <div className="animate-badge-pulse inline-flex items-center gap-2.5 glass border border-violet-500/30 rounded-full px-5 py-2.5 text-sm text-violet-300 mb-10" style={{ animationDelay: "0s" }}>
-          <Sparkles size={13} className="text-cyan-400" />
-          <span className="font-medium">AI-Powered Opportunity Intelligence</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+      {/* Dot grid */}
+      <div
+        className="dot-grid pointer-events-none"
+        style={{ position: "absolute", inset: 0, opacity: 0.5 }}
+      />
+
+      {/* Content */}
+      <div className="relative max-w-4xl mx-auto text-center">
+        {/* Badge */}
+        <div
+          className="animate-fade-up inline-flex items-center gap-2 mb-8"
+          style={{
+            background: "rgba(94,106,210,0.08)",
+            border: "1px solid rgba(94,106,210,0.2)",
+            borderRadius: "99px",
+            padding: "5px 14px",
+            fontSize: "0.75rem",
+            fontWeight: 500,
+            color: "#7A85FF",
+            letterSpacing: "0.02em",
+            animationDelay: "0ms",
+          }}
+        >
+          <Sparkles size={11} />
+          <span>AI-Powered Opportunity Intelligence</span>
+          <span style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--score-high)", flexShrink: 0 }} />
         </div>
 
-        <h1 className="text-5xl sm:text-7xl font-bold mb-6 leading-[1.05] tracking-tight animate-slide-up" style={{ animationDelay: "0.1s" }}>
+        {/* Headline */}
+        <h1
+          className="animate-fade-up"
+          style={{
+            fontSize: "clamp(2.5rem, 5vw, 4rem)",
+            fontWeight: 700,
+            letterSpacing: "-0.04em",
+            lineHeight: 1.08,
+            marginBottom: "20px",
+            color: "var(--text-primary)",
+            animationDelay: "60ms",
+          }}
+        >
           Stop Missing{" "}
           <span className="gradient-text-animated">Deadlines.</span>
           <br />
-          <span className="text-white/90">Start Winning.</span>
+          <span style={{ color: "rgba(242,242,242,0.7)" }}>Start Winning.</span>
         </h1>
 
-        <p className="text-slate-400 text-xl mb-3 max-w-2xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: "0.2s" }}>
-          Paste your opportunity emails. KaamAsaan scores every scholarship, internship, and fellowship
-          against your profile — and tells you exactly what to apply to first.
+        {/* Subline */}
+        <p
+          className="animate-fade-up"
+          style={{
+            fontSize: "1.0625rem",
+            color: "var(--text-secondary)",
+            lineHeight: 1.65,
+            maxWidth: "580px",
+            margin: "0 auto 40px",
+            animationDelay: "120ms",
+          }}
+        >
+          Paste your opportunity emails. KaamAsaan scores every scholarship,
+          internship, and fellowship against your profile and tells you exactly
+          what to apply to first.
         </p>
 
-        <p className="text-slate-600 text-sm mb-12 max-w-xl mx-auto animate-slide-up" style={{ animationDelay: "0.25s" }}>
-          Deterministic scoring engine. No guesswork. Every rank is backed by evidence you can read.
-        </p>
-
-        <div className="animate-slide-up" style={{ animationDelay: "0.3s" }}>
-          <button onClick={onGetStarted} className="group btn-glow inline-flex items-center gap-3 bg-gradient-to-r from-violet-600 via-violet-500 to-cyan-500 text-white font-semibold px-10 py-4 rounded-2xl text-lg shadow-xl shadow-violet-500/30">
-            <Mail size={18} />
-            Analyze My Emails
-            <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-200" />
+        {/* CTA */}
+        <div className="animate-fade-up" style={{ animationDelay: "180ms" }}>
+          <button
+            onClick={onGetStarted}
+            className="btn-primary"
+            style={{
+              padding: "10px 24px",
+              fontSize: "0.9375rem",
+              borderRadius: "8px",
+              gap: "8px",
+            }}
+          >
+            <span>Analyze My Emails</span>
+            <ArrowRight size={15} />
           </button>
         </div>
 
-        <div className="flex items-center justify-center gap-6 mt-8 flex-wrap animate-slide-up" style={{ animationDelay: "0.35s" }}>
+        {/* Stats row */}
+        <div
+          className="animate-fade-up"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "32px",
+            marginTop: "48px",
+            animationDelay: "240ms",
+          }}
+        >
           {[
-            { icon: Shield, text: "Not stored by KaamAsaan" },
-            { icon: Zap,    text: "Results in < 60s" },
-            { icon: Mail,   text: "Gmail integration" },
-          ].map(({ icon: Icon, text }) => (
-            <div key={text} className="flex items-center gap-1.5 text-xs text-slate-600">
-              <Icon size={11} className="text-slate-700" />
-              {text}
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-16 grid grid-cols-3 gap-4 max-w-md mx-auto animate-slide-up" style={{ animationDelay: "0.4s" }}>
-          {[
-            { icon: Mail,     value: "Up to 15",  label: "Emails analyzed" },
-            { icon: Clock,    value: "< 15s",     label: "Ranked results" },
-            { icon: FileText, value: "1-click",   label: "Cover letter" },
-          ].map(({ icon: Icon, value, label }) => (
-            <div key={label} className="card-hover glass border border-violet-500/15 rounded-2xl py-5 px-3 group">
-              <Icon size={15} className="text-violet-400 mx-auto mb-2.5 group-hover:text-cyan-400 transition-colors" />
-              <div className="text-2xl font-bold text-white mb-0.5">{value}</div>
-              <div className="text-xs text-slate-500">{label}</div>
+            { value: "< 15s", label: "ranked results" },
+            { value: "4 factors", label: "scoring engine" },
+            { value: "1-click", label: "cover letter" },
+          ].map(({ value, label }) => (
+            <div key={label} style={{ textAlign: "center" }}>
+              <div style={{ fontSize: "1.25rem", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text-primary)" }}>{value}</div>
+              <div style={{ fontSize: "0.75rem", color: "var(--text-tertiary)", marginTop: "2px", letterSpacing: "0.02em" }}>{label}</div>
             </div>
           ))}
         </div>

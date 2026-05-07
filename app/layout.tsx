@@ -4,7 +4,12 @@ import "./globals.css";
 import Providers from "@/components/Providers";
 import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "KaamAsaan",
@@ -17,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className={`${inter.className} bg-[#0A0F1E] text-white min-h-screen`}>
+      <body className={`${inter.className} min-h-screen`} style={{ background: "var(--bg-app)", color: "var(--text-primary)" }}>
         <Providers>{children}</Providers>
         <Toaster position="bottom-right" theme="dark" richColors />
       </body>
