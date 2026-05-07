@@ -1,9 +1,7 @@
 import OpenAI from "openai";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { detectUrdu } from "@/lib/utils";
 import type { StudentProfile, RankedOpportunity } from "@/lib/types";
-
-export const runtime = "edge";
 
 const SYSTEM_PROMPT = `You are KaamAsaan AI Career Advisor — a smart, friendly, brutally honest career guide built specifically for Pakistani tech students.
 
@@ -31,9 +29,7 @@ function buildContextBlock(
   topOpportunities?: RankedOpportunity[] | null
 ): string {
   if (!profile && !topOpportunities?.length) return "";
-
   const lines: string[] = ["\n\n--- USER CONTEXT ---"];
-
   if (profile) {
     lines.push(`Student: ${profile.name || "User"}`);
     lines.push(`Degree: ${profile.degree}, Semester ${profile.semester}`);
@@ -43,16 +39,12 @@ function buildContextBlock(
     lines.push(`Financial need: ${profile.financialNeed ? "Yes" : "No"}`);
     lines.push(`Preferred types: ${profile.preferredTypes.join(", ")}`);
   }
-
   if (topOpportunities?.length) {
     lines.push("\nTop ranked opportunities from their inbox:");
     topOpportunities.slice(0, 3).forEach((r, i) => {
-      lines.push(
-        `${i + 1}. ${r.opportunity.title} (${r.opportunity.organization}) — Score: ${r.score.total}/100, Deadline: ${r.opportunity.deadline ?? "unknown"}`
-      );
+      lines.push(`${i + 1}. ${r.opportunity.title} (${r.opportunity.organization}) — Score: ${r.score.total}/100`);
     });
   }
-
   lines.push("--- END CONTEXT ---");
   return lines.join("\n");
 }
@@ -60,9 +52,7 @@ function buildContextBlock(
 export async function POST(req: NextRequest) {
   try {
     const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      return new Response(JSON.stringify({ error: "API key not configured" }), { status: 500 });
-    }
+    if (!apiKey) return NextResponse.json({ error: "API key not configured" }, { status: 500 });
 
     const { message, profile, topOpportunities } = await req.json() as {
       message: string;
@@ -70,23 +60,19 @@ export async function POST(req: NextRequest) {
       topOpportunities?: RankedOpportunity[] | null;
     };
 
-    if (!message?.trim()) {
-      return new Response(JSON.stringify({ error: "Empty message" }), { status: 400 });
-    }
+    if (!message?.trim()) return NextResponse.json({ error: "Empty message" }, { status: 400 });
 
     const isUrdu = detectUrdu(message);
     const contextBlock = buildContextBlock(profile, topOpportunities);
     const systemWithContext = SYSTEM_PROMPT + contextBlock;
-
     const languageInstruction = isUrdu
       ? "The user is writing in Roman Urdu / Urdu. You MUST respond in Roman Urdu only."
       : "The user is writing in English. Respond in English only.";
 
     const client = new OpenAI({ apiKey });
 
-    const stream = await client.chat.completions.create({
+    const response = await client.chat.completions.create({
       model: "gpt-4o-mini",
-      stream: true,
       temperature: 0.7,
       max_tokens: 400,
       messages: [
@@ -95,34 +81,10 @@ export async function POST(req: NextRequest) {
       ],
     });
 
-    const encoder = new TextEncoder();
-    const readable = new ReadableStream({
-      async start(controller) {
-        try {
-          for await (const chunk of stream) {
-            const text = chunk.choices[0]?.delta?.content ?? "";
-            if (text) {
-              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`));
-            }
-          }
-          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-        } finally {
-          controller.close();
-        }
-      },
-    });
-
-    return new Response(readable, {
-      headers: {
-        "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache",
-        "Connection": "keep-alive",
-      },
-    });
+    const text = response.choices[0].message.content ?? "Sorry, I could not generate a response.";
+    return NextResponse.json({ text });
   } catch (err) {
     console.error("[chat] error:", err);
-    return new Response(JSON.stringify({ error: "Advisor unavailable, please try again." }), {
-      status: 500,
-    });
+    return NextResponse.json({ error: "Advisor unavailable, please try again." }, { status: 500 });
   }
 }
