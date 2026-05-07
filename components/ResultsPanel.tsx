@@ -15,18 +15,18 @@ interface ResultsPanelProps {
 
 export function ResultsSkeleton() {
   return (
-    <div className="card" style={{ overflow: "hidden" }}>
-      <div style={{ padding: "10px 16px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        <div className="shimmer" style={{ height: 14, width: 140, borderRadius: 4 }} />
+    <div style={{ background: "var(--color-bg-level-2)", border: "1px solid var(--color-border-primary)", borderRadius: "var(--radius-8)", overflow: "hidden", boxShadow: "var(--shadow-low)" }}>
+      <div style={{ padding: "10px 16px", borderBottom: "1px solid var(--color-line-secondary)" }}>
+        <div className="shimmer" style={{ height: 14, width: 140, borderRadius: "var(--radius-4)" }} />
       </div>
       {[1,2,3].map(i => (
-        <div key={i} style={{ padding: "10px 16px", borderBottom: "1px solid rgba(255,255,255,0.04)", display: "flex", alignItems: "center", gap: 12 }}>
-          <div className="shimmer" style={{ width: 22, height: 22, borderRadius: 4, flexShrink: 0 }} />
+        <div key={i} style={{ padding: "10px 16px", borderBottom: "1px solid var(--color-line-tertiary)", display: "flex", alignItems: "center", gap: 12 }}>
+          <div className="shimmer" style={{ width: 20, height: 20, borderRadius: "var(--radius-4)", flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
-            <div className="shimmer" style={{ height: 13, width: "55%", borderRadius: 3, marginBottom: 5 }} />
-            <div className="shimmer" style={{ height: 10, width: "30%", borderRadius: 3 }} />
+            <div className="shimmer" style={{ height: 13, width: "55%", borderRadius: "var(--radius-4)", marginBottom: 5 }} />
+            <div className="shimmer" style={{ height: 10, width: "30%", borderRadius: "var(--radius-4)" }} />
           </div>
-          <div className="shimmer" style={{ height: 20, width: 36, borderRadius: 99 }} />
+          <div className="shimmer" style={{ height: 20, width: 36, borderRadius: "var(--radius-rounded)" }} />
         </div>
       ))}
     </div>
@@ -45,46 +45,67 @@ export default function ResultsPanel({ data, profile }: ResultsPanelProps) {
   return (
     <div className="animate-fade-up" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
 
-      {/* Alerts */}
+      {/* Urgency alerts */}
       {critical.length > 0 && (
         <div style={{
           display: "flex", alignItems: "center", gap: 8,
           padding: "8px 12px",
-          background: "rgba(239,68,68,0.06)",
-          border: "1px solid rgba(239,68,68,0.15)",
-          borderRadius: 6, fontSize: "0.8125rem",
+          background: "rgba(248,113,113,0.07)",
+          border: "1px solid rgba(248,113,113,0.18)",
+          borderRadius: "var(--radius-6)",
+          fontSize: "0.8125rem",
         }}>
-          <AlertTriangle size={13} style={{ color: "#ef4444", flexShrink: 0 }} />
-          <span style={{ color: "#ef4444", fontWeight: 500 }}>{critical.length} deadline{critical.length > 1 ? "s" : ""} in 3 days —</span>
-          <span style={{ color: "#71717a" }}>{critical.map(r => r.opportunity.title).join(", ")}</span>
+          <AlertTriangle size={13} style={{ color: "var(--score-low)", flexShrink: 0 }} />
+          <span style={{ color: "var(--score-low)", fontWeight: 510 }}>
+            {critical.length} deadline{critical.length > 1 ? "s" : ""} in 3 days
+          </span>
+          <span style={{ color: "var(--color-text-tertiary)" }}>
+            — {critical.map(r => r.opportunity.title).join(", ")}
+          </span>
         </div>
       )}
       {thisWeek.length > 0 && critical.length === 0 && (
         <div style={{
           display: "flex", alignItems: "center", gap: 8,
           padding: "8px 12px",
-          background: "rgba(245,158,11,0.06)",
-          border: "1px solid rgba(245,158,11,0.12)",
-          borderRadius: 6, fontSize: "0.8125rem",
+          background: "rgba(245,158,11,0.07)",
+          border: "1px solid rgba(245,158,11,0.15)",
+          borderRadius: "var(--radius-6)",
+          fontSize: "0.8125rem",
         }}>
-          <Clock size={13} style={{ color: "#f59e0b", flexShrink: 0 }} />
-          <span style={{ color: "#f59e0b", fontWeight: 500 }}>{thisWeek.length} deadline{thisWeek.length > 1 ? "s" : ""} this week —</span>
-          <span style={{ color: "#71717a" }}>{thisWeek.map(r => r.opportunity.title).join(", ")}</span>
+          <Clock size={13} style={{ color: "var(--score-mid)", flexShrink: 0 }} />
+          <span style={{ color: "var(--score-mid)", fontWeight: 510 }}>
+            {thisWeek.length} deadline{thisWeek.length > 1 ? "s" : ""} this week
+          </span>
+          <span style={{ color: "var(--color-text-tertiary)" }}>
+            — {thisWeek.map(r => r.opportunity.title).join(", ")}
+          </span>
         </div>
       )}
 
-      {/* Table */}
-      <div className="card" style={{ overflow: "hidden" }}>
+      {/* Main table */}
+      <div style={{
+        background: "var(--color-bg-level-2)",
+        border: "1px solid var(--color-border-primary)",
+        borderRadius: "var(--radius-8)",
+        overflow: "hidden",
+        boxShadow: "var(--shadow-low)",
+      }}>
         {/* Header */}
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
           padding: "10px 16px",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          borderBottom: "1px solid var(--color-line-secondary)",
           flexWrap: "wrap", gap: 8,
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <Trophy size={13} style={{ color: "#f59e0b" }} />
-            <span style={{ fontSize: "0.875rem", fontWeight: 600, letterSpacing: "-0.02em", color: "#fafafa" }}>
+            <Trophy size={13} style={{ color: "var(--score-mid)" }} />
+            <span style={{
+              fontSize: "0.875rem",
+              fontWeight: 590,
+              letterSpacing: "-0.02em",
+              color: "var(--color-text-primary)",
+            }}>
               Ranked Results
             </span>
             <span className="badge">{results.length}</span>
@@ -93,21 +114,29 @@ export default function ResultsPanel({ data, profile }: ResultsPanelProps) {
 
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <CareerRoadmap profile={profile} />
-            <span style={{ fontSize: "0.75rem", color: "#52525b", display: "flex", alignItems: "center", gap: 6 }}>
-              <TrendingUp size={11} /> avg {avg}
-              <Star size={11} style={{ marginLeft: 4 }} /> top {topScore}
+            <span style={{
+              fontSize: "0.75rem",
+              color: "var(--color-text-quaternary)",
+              display: "flex", alignItems: "center", gap: 8,
+            }}>
+              <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                <TrendingUp size={11} /> avg {avg}
+              </span>
+              <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                <Star size={11} /> top {topScore}
+              </span>
             </span>
           </div>
         </div>
 
-        {/* Column headers */}
+        {/* Column header */}
         <div style={{
           display: "flex", alignItems: "center",
           padding: "5px 16px",
-          borderBottom: "1px solid rgba(255,255,255,0.04)",
+          borderBottom: "1px solid var(--color-line-tertiary)",
         }}>
-          <div style={{ width: 28 }} />
-          <div className="label" style={{ flex: 1 }}>Opportunity</div>
+          <div style={{ width: 26 }} />
+          <div className="label" style={{ flex: 1, marginLeft: 12 }}>Opportunity</div>
           <div className="label" style={{ display: "flex", alignItems: "center", gap: 4 }}>
             <Filter size={9} /> Type · Score
           </div>
@@ -116,9 +145,11 @@ export default function ResultsPanel({ data, profile }: ResultsPanelProps) {
         {/* Rows */}
         {results.length === 0 ? (
           <div style={{ padding: "48px 16px", textAlign: "center" }}>
-            <Trophy size={20} style={{ color: "#3f3f46", margin: "0 auto 8px" }} />
-            <p style={{ fontSize: "0.875rem", fontWeight: 500, color: "#52525b" }}>No matching opportunities found</p>
-            <p style={{ fontSize: "0.8125rem", color: "#3f3f46", marginTop: 4 }}>
+            <Trophy size={20} style={{ color: "var(--color-text-quaternary)", margin: "0 auto 8px" }} />
+            <p style={{ fontSize: "0.875rem", fontWeight: 510, color: "var(--color-text-tertiary)" }}>
+              No matching opportunities found
+            </p>
+            <p style={{ fontSize: "0.8125rem", color: "var(--color-text-quaternary)", marginTop: 4 }}>
               {spamCount > 0 ? `${spamCount} emails filtered as noise.` : "Try selecting more opportunity types."}
             </p>
           </div>
@@ -137,8 +168,9 @@ export default function ResultsPanel({ data, profile }: ResultsPanelProps) {
         {processedAt && (
           <div style={{
             padding: "6px 16px",
-            borderTop: "1px solid rgba(255,255,255,0.04)",
-            fontSize: "0.6875rem", color: "#3f3f46",
+            borderTop: "1px solid var(--color-line-tertiary)",
+            fontSize: "0.6875rem",
+            color: "var(--color-text-quaternary)",
           }}>
             Analyzed {new Date(processedAt).toLocaleTimeString()} · Saved locally
           </div>

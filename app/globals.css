@@ -2,44 +2,131 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ────────────────────────────────────────────────────────────
-   MONOCHROME SYSTEM — Black & White only. Zero exceptions.
-   ──────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   LINEAR.APP EXACT DESIGN SYSTEM — Extracted from source CSS
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Linear's actual font ────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
-  --black:        #000000;
-  --white:        #ffffff;
-  --white-dim:    rgba(255,255,255,0.6);
-  --white-faint:  rgba(255,255,255,0.15);
-  --white-ghost:  rgba(255,255,255,0.06);
-  --border:       rgba(255,255,255,0.2);
-  --border-strong: #ffffff;
+  /* ── Header ─────────────────────────────────────────────── */
+  --header-height: 52px;
+  --header-bg: rgba(11,11,11,0.85);
+  --header-border: rgba(255,255,255,0.08);
+
+  /* ── Layout ─────────────────────────────────────────────── */
+  --page-padding-inline: 24px;
+  --page-max-width: 1024px;
+  --radius-4:  4px;
+  --radius-6:  6px;
+  --radius-8:  8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-rounded: 9999px;
+
+  /* ── EXACT Linear dark theme colors ─────────────────────── */
+  /* Backgrounds — layered elevation system */
+  --color-bg-primary:    #08090a;
+  --color-bg-secondary:  #1c1c1f;
+  --color-bg-tertiary:   #232326;
+  --color-bg-quaternary: #28282c;
+  --color-bg-panel:      #0f1011;
+
+  /* Level system */
+  --color-bg-level-0: #08090a;
+  --color-bg-level-1: #0f1011;
+  --color-bg-level-2: #141516;
+  --color-bg-level-3: #191a1b;
+  --color-bg-tint:    #141516;
+
+  /* Translucent surfaces */
+  --color-bg-translucent: rgba(255,255,255,0.05);
+
+  /* Borders */
+  --color-border-primary:              #23252a;
+  --color-border-secondary:            #34343a;
+  --color-border-tertiary:             #3e3e44;
+  --color-border-translucent:          rgba(255,255,255,0.05);
+  --color-border-translucent-strong:   rgba(255,255,255,0.08);
+
+  /* Lines / dividers */
+  --color-line-primary:   #37393a;
+  --color-line-secondary: #202122;
+  --color-line-tertiary:  #18191a;
+
+  /* Text */
+  --color-text-primary:    #f7f8f8;
+  --color-text-secondary:  #d0d6e0;
+  --color-text-tertiary:   #8a8f98;
+  --color-text-quaternary: #62666d;
+
+  /* Brand */
+  --color-brand-bg:   #5e6ad2;
+  --color-brand-text: #fff;
+  --color-link-primary: #828fff;
+  --color-link-hover:   #fff;
+
+  /* Buttons */
+  --color-button-invert-bg:       #e5e5e6;
+  --color-button-invert-bg-hover: #ffffff;
+
+  /* Shadows */
+  --shadow-low:    0px 2px 4px rgba(0,0,0,0.1);
+  --shadow-medium: 0px 4px 24px rgba(0,0,0,0.2);
+  --shadow-high:   0px 7px 32px rgba(0,0,0,0.35);
+
+  /* Typography — Linear's exact font stack */
+  --font-regular: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+                  "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", sans-serif;
+  --font-monospace: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Font weights — Linear uses unusual values: 510, 590, 680 */
+  --font-weight-normal:   400;
+  --font-weight-medium:   510;
+  --font-weight-semibold: 590;
+  --font-weight-bold:     680;
+
+  /* Score colours — preserving semantic meaning */
+  --score-high: #4ade80;
+  --score-mid:  #f59e0b;
+  --score-low:  #f87171;
 }
 
-/* ── Reset ─────────────────────────────────────────────────── */
+/* ── Reset ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
+  font-size: 100%;
+  font-weight: var(--font-weight-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--black);
-  color: var(--white);
-  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-  font-size: 14px;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-regular);
+  font-size: 0.875rem;
   line-height: 1.5;
+  min-height: 100vh;
 }
 
-::selection { background: var(--white); color: var(--black); }
+::selection {
+  background: color-mix(in lch, var(--color-brand-bg), black 10%);
+  color: #fff;
+}
 
-::-webkit-scrollbar { width: 3px; height: 3px; }
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 99px; }
+::-webkit-scrollbar-thumb { background: var(--color-border-secondary); border-radius: var(--radius-rounded); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-border-tertiary); }
 
-/* ── Keyframes ─────────────────────────────────────────────── */
+/* ── Keyframes ───────────────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeIn {
@@ -47,245 +134,288 @@ body {
   to   { opacity: 1; }
 }
 @keyframes rowIn {
-  from { opacity: 0; transform: translateX(-4px); }
+  from { opacity: 0; transform: translateX(-5px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 @keyframes shimmer {
-  0%   { background-position: -600px 0; }
-  100% { background-position: 600px 0; }
+  0%   { background-position: -800px 0; }
+  100% { background-position: 800px 0; }
 }
 @keyframes spin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
-@keyframes blink {
-  0%,100% { opacity: 1; }
-  50%     { opacity: 0; }
+@keyframes gradientShift {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
 }
 
-/* ── Utility classes ───────────────────────────────────────── */
+/* ── Animation utilities ─────────────────────────────────── */
 .animate-fade-up      { animation: fadeUp 0.35s cubic-bezier(0.16,1,0.3,1) both; }
 .animate-fade-in      { animation: fadeIn 0.25s ease both; }
-.animate-row-in       { animation: rowIn  0.25s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-row-in       { animation: rowIn  0.28s cubic-bezier(0.16,1,0.3,1) both; }
 .animate-fade-slide-in{ animation: fadeUp 0.3s ease both; }
 .animate-slide-up     { animation: fadeUp 0.35s ease both; }
 .animate-scale-in     { animation: fadeIn 0.2s ease both; }
 .animate-spin         { animation: spin 0.8s linear infinite; }
 .animate-badge-pulse  { animation: none; }
 .animate-float        { animation: none; }
+.animate-orb-1,.animate-orb-2,.animate-orb-3 { display: none !important; }
 
 .delay-0 { animation-delay: 0ms; }
-.delay-1 { animation-delay: 40ms; }
-.delay-2 { animation-delay: 80ms; }
-.delay-3 { animation-delay: 120ms; }
-.delay-4 { animation-delay: 160ms; }
-.delay-5 { animation-delay: 200ms; }
+.delay-1 { animation-delay: 50ms; }
+.delay-2 { animation-delay: 100ms; }
+.delay-3 { animation-delay: 150ms; }
+.delay-4 { animation-delay: 200ms; }
+.delay-5 { animation-delay: 250ms; }
 
-/* ── Shimmer ────────────────────────────────────────────────── */
+/* ── Shimmer ─────────────────────────────────────────────── */
 .shimmer {
-  background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
-  background-size: 1200px 100%;
-  animation: shimmer 1.6s infinite;
+  background: linear-gradient(90deg,
+    var(--color-bg-level-2) 25%,
+    var(--color-bg-level-3) 50%,
+    var(--color-bg-level-2) 75%
+  );
+  background-size: 1600px 100%;
+  animation: shimmer 1.8s infinite;
 }
 
-/* ── BUTTONS ─────────────────────────────────────────────────
-   Primary  = white bg, black text
-   Secondary = black bg, white border, white text → inverts on hover
-   Ghost    = transparent, white text
-   ────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   BUTTON SYSTEM — Linear exact style
+   Primary: brand bg (#5e6ad2) → hover lighter
+   Invert: off-white bg (#e5e5e6), dark text → hover pure white
+   Outline: transparent bg, border, white text → hover muted
+   ═══════════════════════════════════════════════════════════ */
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: var(--white);
-  color: var(--black);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  padding: 8px 18px;
-  border-radius: 4px;
-  border: 1px solid var(--white);
+  background: var(--color-brand-bg);
+  color: var(--color-brand-text);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.006em;
+  padding: 7px 14px;
+  border-radius: var(--radius-6);
+  border: none;
   cursor: pointer;
-  transition: background 120ms ease, color 120ms ease;
+  transition: opacity 120ms ease, transform 120ms ease, background 120ms ease;
   white-space: nowrap;
   text-decoration: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 1px 2px rgba(0,0,0,0.3);
 }
-.btn-primary:hover {
-  background: var(--black);
-  color: var(--white);
+.btn-primary:hover  { opacity: 0.88; }
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+/* Linear's "invert" button — the main CTA style */
+.btn-invert {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--color-button-invert-bg);
+  color: #0a0a0a;
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
+  padding: 8px 16px;
+  border-radius: var(--radius-6);
+  border: none;
+  cursor: pointer;
+  transition: background 120ms ease, transform 120ms ease;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 3px rgba(0,0,0,0.4);
 }
-.btn-primary:active  { transform: scale(0.98); }
-.btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+.btn-invert:hover  { background: var(--color-button-invert-bg-hover); }
+.btn-invert:active { transform: scale(0.98); }
+.btn-invert:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: var(--black);
-  color: var(--white);
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  padding: 8px 18px;
-  border-radius: 4px;
-  border: 1px solid var(--border);
+  background: var(--color-bg-translucent);
+  color: var(--color-text-secondary);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.006em;
+  padding: 7px 14px;
+  border-radius: var(--radius-6);
+  border: 1px solid var(--color-border-translucent-strong);
   cursor: pointer;
-  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease, transform 120ms ease;
   white-space: nowrap;
   text-decoration: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
 }
 .btn-secondary:hover {
-  background: var(--white);
-  color: var(--black);
-  border-color: var(--white);
+  background: rgba(255,255,255,0.08);
+  border-color: var(--color-border-secondary);
+  color: var(--color-text-primary);
 }
 .btn-secondary:active { transform: scale(0.98); }
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   background: transparent;
-  color: var(--white-dim);
-  font-size: 0.875rem;
-  font-weight: 400;
-  padding: 6px 10px;
-  border-radius: 4px;
+  color: var(--color-text-tertiary);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-normal);
+  padding: 5px 8px;
+  border-radius: var(--radius-6);
   border: none;
   cursor: pointer;
-  transition: color 120ms ease;
+  transition: background 100ms ease, color 100ms ease;
 }
-.btn-ghost:hover { color: var(--white); }
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.05);
+  color: var(--color-text-primary);
+}
 
-/* ── INPUTS (white bg, black text) ───────────────────────────
-   This is what the user explicitly asked for.
-   ──────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   INPUT SYSTEM — Linear dark inputs
+   ═══════════════════════════════════════════════════════════ */
+
 .input-field {
   width: 100%;
-  background: var(--white);
-  border: 1px solid var(--white);
-  border-radius: 4px;
-  padding: 8px 12px;
-  color: var(--black);
-  font-size: 0.875rem;
-  font-family: inherit;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-6);
+  padding: 7px 10px;
+  color: var(--color-text-primary);
+  font-size: 0.8125rem;
+  font-family: var(--font-regular);
+  font-weight: var(--font-weight-normal);
   outline: none;
-  transition: box-shadow 120ms ease;
+  transition: border-color 120ms ease, background 120ms ease, box-shadow 120ms ease;
   resize: none;
+  line-height: 1.5;
 }
-.input-field::placeholder { color: rgba(0,0,0,0.35); }
+.input-field::placeholder { color: var(--color-text-quaternary); }
+.input-field:hover { border-color: var(--color-border-secondary); }
 .input-field:focus {
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.4);
+  border-color: var(--color-brand-bg);
+  background: rgba(94,106,210,0.04);
+  box-shadow: 0 0 0 2px rgba(94,106,210,0.18);
 }
 
-/* Also style native selects inside forms */
-select.input-field {
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  padding-right: 28px;
-}
+/* ═══════════════════════════════════════════════════════════
+   CARD / SURFACE SYSTEM
+   ═══════════════════════════════════════════════════════════ */
 
-/* ── CARD / CONTAINER ────────────────────────────────────────
-   Black bg, white 1px border
-   ──────────────────────────────────────────────────────────── */
 .card {
-  background: var(--black);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  background: var(--color-bg-level-2);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-low);
 }
 
-/* ── BADGE ────────────────────────────────────────────────────
-   White border, white text on black
-   ──────────────────────────────────────────────────────────── */
+.card-elevated {
+  background: var(--color-bg-level-3);
+  border: 1px solid var(--color-border-secondary);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-medium);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BADGE / PILL SYSTEM
+   ═══════════════════════════════════════════════════════════ */
+
 .badge {
   display: inline-flex;
   align-items: center;
   font-size: 0.6875rem;
-  font-weight: 500;
-  padding: 2px 8px;
-  border-radius: 99px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--white-dim);
+  font-weight: var(--font-weight-medium);
+  padding: 2px 7px;
+  border-radius: var(--radius-rounded);
+  border: 1px solid var(--color-border-primary);
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-tertiary);
   letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
-/* Score badges — monochrome only */
 .score-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 0.6875rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   padding: 2px 8px;
-  border-radius: 99px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--white);
+  border-radius: var(--radius-rounded);
   font-variant-numeric: tabular-nums;
   min-width: 34px;
 }
-/* Keep class names but override colors to white */
-.score-high { background: transparent; color: var(--white); border-color: var(--border); }
-.score-mid  { background: transparent; color: var(--white); border-color: var(--border); }
-.score-low  { background: transparent; color: var(--white); border-color: var(--border); }
+
+.score-high { background: rgba(74,222,128,0.1);  color: var(--score-high); border: 1px solid rgba(74,222,128,0.2); }
+.score-mid  { background: rgba(245,158,11,0.1); color: var(--score-mid);  border: 1px solid rgba(245,158,11,0.2); }
+.score-low  { background: rgba(248,113,113,0.1); color: var(--score-low);  border: 1px solid rgba(248,113,113,0.2); }
 
 .type-pill {
   display: inline-flex;
   align-items: center;
   font-size: 0.6875rem;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   padding: 2px 8px;
-  border-radius: 99px;
-  border: 1px solid var(--border);
-  color: var(--white-dim);
-  background: transparent;
+  border-radius: var(--radius-rounded);
+  border: 1px solid var(--color-border-primary);
+  color: var(--color-text-tertiary);
+  background: rgba(255,255,255,0.04);
   white-space: nowrap;
 }
 
-/* ── LIST ROW ─────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   LIST ROW — Linear's core interaction pattern
+   ═══════════════════════════════════════════════════════════ */
+
 .list-row {
   display: flex;
   align-items: center;
   padding: 10px 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid var(--color-line-secondary);
   cursor: pointer;
   transition: background 100ms ease;
 }
-.list-row:hover { background: rgba(255,255,255,0.04); }
+.list-row:hover { background: rgba(255,255,255,0.03); }
 .list-row:last-child { border-bottom: none; }
 
-/* ── LABEL ────────────────────────────────────────────────── */
+/* ── Label ───────────────────────────────────────────────── */
 .label {
   font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--white-dim);
+  color: var(--color-text-quaternary);
 }
 
-/* ── MISC ─────────────────────────────────────────────────── */
-.card-hover { transition: border-color 120ms ease; }
-.card-hover:hover { border-color: var(--white) !important; }
+/* ── Utilities ───────────────────────────────────────────── */
+.card-hover  { transition: border-color 120ms ease; }
+.card-hover:hover { border-color: var(--color-border-secondary) !important; }
 
-.glass       { background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); border: 1px solid var(--border); }
-.glass-strong{ background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border: 1px solid var(--border); }
+.glass       { background: rgba(8,9,10,0.8); backdrop-filter: blur(20px); border: 1px solid var(--color-border-translucent-strong); }
+.glass-strong{ background: rgba(8,9,10,0.95); backdrop-filter: blur(24px); border: 1px solid var(--color-border-primary); }
 
-/* Subtle dot grid for hero */
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 26px 26px;
 }
 
-/* Legacy classes — overridden to monochrome */
-.gradient-text-animated { color: var(--white); background: none; -webkit-text-fill-color: var(--white); }
+.gradient-text-animated {
+  background: linear-gradient(135deg, var(--color-text-primary), var(--color-brand-bg), #9aa3ff);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+}
+
 .btn-glow { transition: opacity 120ms ease, transform 120ms ease; }
-.btn-glow:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn-glow:hover { opacity: 0.88; }
 .glow-violet { box-shadow: none; }
-.animate-orb-1, .animate-orb-2, .animate-orb-3 { display: none; }
